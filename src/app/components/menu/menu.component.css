@@ -1,0 +1,106 @@
+a {
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
+
+.menu {
+  width: 250px;
+  height: 100vh;
+  background-color: #537173;
+  position: relative;
+}
+
+.burger,
+.route-item:not(:last-child) {
+  padding: 0 24px;
+}
+
+.burger__container {
+  padding-top: 24px;
+}
+
+.burger {
+  width: 22.5px;
+  height: 15px;
+  position: relative;
+}
+
+.burger__line {
+  width: 25px;
+  height: 2px;
+  position: absolute;
+  background-color: white;
+}
+
+.burger__line:nth-child(1) {
+  top: 0;
+}
+
+.burger__line:nth-child(2) {
+  top: 46%;
+}
+
+.burger__line:nth-child(3) {
+  bottom: 0;
+}
+
+.route {
+  display: flex;
+  flex-direction: column;
+}
+
+.route__main {
+  margin-top: 70px;
+}
+
+.route-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color .3s ease-in-out;
+}
+
+.route-item:not(:last-child) {
+  padding: 12px 24px;
+}
+
+.route-item:not(:last-child):hover {
+  background-color: #C05640;
+}
+
+.route__user {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #2B4A52;
+}
+
+.route__user svg {
+  padding-left: 24px;
+}
+
+.route__user p {
+  padding-top: 21px;
+  padding-bottom: 21px;
+}
+
+.route-text {
+  color: white;
+  margin-left: 15px;
+  font-size: 16px;
+}
+
+.route__seperator{
+  width: 100%;
+  height: 1px;
+  background-color: white;
+}
+
+.seperator {
+  height: 100%;
+  width: 100%;
+}
+
