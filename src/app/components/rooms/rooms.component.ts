@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 
+const fillArray = (n: number) => {
+  let arr = [];
+  if (n) for (let i = 1; i <= n;) arr.push('Переговорка ' + i++);
+  return arr;
+}
+
 @Component({
   selector: 'rooms',
   templateUrl: './rooms.component.html',
@@ -7,5 +13,6 @@ import { Component } from '@angular/core';
 })
 
 export class RoomsComponent {
-
+  rooms = fillArray(5);
+  isOpenCalendar: boolean = false;
 }

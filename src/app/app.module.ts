@@ -10,6 +10,7 @@ import {RoomsComponent} from "./components/rooms/rooms.component";
 import {MainPageComponent} from "./components/main/main-page.component";
 import {CalendarComponent} from "./components/calendar/calendar.component";
 import {NotFoundComponent} from "./components/notfound/NotFound.component";
+import {TableCalendar} from "./components/table-calendar/table-calendar.component";
 
 const appRoutes: Routes = [
   {path: '', component: MainPageComponent},
@@ -25,7 +26,8 @@ const appRoutes: Routes = [
     RoomsComponent,
     MainPageComponent,
     CalendarComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    TableCalendar
   ],
   imports: [
     BrowserModule,
