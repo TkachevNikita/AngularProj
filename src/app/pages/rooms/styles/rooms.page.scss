@@ -1,0 +1,31 @@
+.buttons__container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.page__button {
+  padding: 40px;
+  color: white;
+  font-size: 32px;
+  background-color: #C05640;
+  border: none;
+  cursor: pointer;
+}
+
+.back {
+  margin-left: auto;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+button:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+app-table-calendar {
+  height: 100%;
+}
+

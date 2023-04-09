@@ -5,34 +5,31 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MenuComponent } from "./components/menu/menu.component";
-import {RoomsComponent} from "./components/rooms/rooms.component";
-import {MainPageComponent} from "./components/main/main-page.component";
-import {CalendarComponent} from "./components/calendar/calendar.component";
-import {NotFoundComponent} from "./components/notfound/NotFound.component";
-import {TableCalendar} from "./components/table-calendar/table-calendar.component";
+import { LayoutModule } from './layout/layout.module';
+import { RoomsPageModule } from './pages/rooms/rooms.module';
+import { EmployeesPageModule } from './pages/employees/employees.module';
+import { CalendarPageModule } from './pages/calendar/calendar.module'
 
-const appRoutes: Routes = [
-  {path: '', component: MainPageComponent},
-  {path: 'rooms', component: RoomsComponent},
-  {path: 'calendar', component: CalendarComponent},
-  {path: '**', component: NotFoundComponent}
-]
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/rooms',
+    pathMatch: 'full'
+  }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent,
-    RoomsComponent,
-    MainPageComponent,
-    CalendarComponent,
-    NotFoundComponent,
-    TableCalendar
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(routes),
+    LayoutModule,
+    RoomsPageModule,
+    EmployeesPageModule,
+    CalendarPageModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
