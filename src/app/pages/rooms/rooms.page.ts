@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-
-const fillArray = (n: number) => {
-  const arr = [];
-  if (n) for (let i = 1; i <= n;) arr.push('Переговорка ' + i++);
-  return arr;
-}
+import { roomData } from 'src/app/view-models/room/room.model';
 
 @Component({
   selector: 'app-rooms',
@@ -13,6 +8,5 @@ const fillArray = (n: number) => {
 })
 
 export class RoomsPageComponent {
-  rooms = fillArray(5);
-  isOpenCalendar = false;
+  rooms = roomData;
 }

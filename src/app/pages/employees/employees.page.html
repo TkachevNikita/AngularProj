@@ -1,6 +1,7 @@
 
 <div class="container">
-  <app-employee></app-employee>
-  <app-employee></app-employee>
-  <app-employee></app-employee>
+  <app-employee
+    *ngFor="let emp of employees"
+    [employee] = "emp">
+  </app-employee>
 </div>
