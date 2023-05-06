@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
-import { RoomsPagedRoutingModule } from './rooms-routing.module';
 import { RoomsPageComponent } from './rooms.page';
-import { TableCalendarModule } from 'src/app/components/table-calendar/table-calendar.module';
+import { TableCalendarModule } from '../../components/table-calendar/table-calendar.module';
+import { RoomsPagedRoutingModule } from './rooms-routing.module';
 
 
 @NgModule({
@@ -15,4 +14,5 @@ import { TableCalendarModule } from 'src/app/components/table-calendar/table-cal
   ],
   declarations: [RoomsPageComponent]
 })
+
 export class RoomsPageModule { }

@@ -1,43 +1,43 @@
-export class Employee {
-  name: string
-  department: string
-  post: string
+import { IEmployee } from 'src/app/interfaces/employess.interface';
+import { Professions } from '../../enums/profession.enums';
 
-  constructor(userName: string, userDepartment: string, userPost: string) {
-    this.name = userName;
-    this.department = userDepartment;
-    this.post = userPost;
+export class EmployeeModel {
+
+  public readonly name: string;
+  public readonly age: number;
+  public readonly surname: string;
+  public readonly salary: number;
+  public readonly profession: Professions | undefined;
+
+  constructor(data: IEmployee) {
+    this.age = data.age;
+    this.surname = data.surname;
+    this.profession = this.getProfession(data.profession);
+    this.name = data.name;
+    this.salary = data.salary;
   }
+
+  /**
+   * Вернуть профессию
+   */
+  public getProfession(key: string): Professions | undefined {
+    switch (key) {
+      case 'programmer':
+        return Professions.programmer
+        break;
+      case 'manager':
+        return Professions.manager
+        break;
+      case 'analyst':
+        return Professions.analyst
+        break;
+      case 'qaengineer':
+        return Professions.qaengineer
+        break;
+      default:
+        return Professions.analyst;
+        break;
+    }
+  }
+
 }
-
-export const data = [
-  {
-    name: 'Иван Иванов',
-    department: 'Отдел разработки',
-    post: 'Junior разработчик'
-  },
-
-  {
-    name: 'Василий Васильев',
-    department: 'Отдел маркетинга',
-    post: 'Маркетинговый менеджер',
-  },
-
-  {
-    name: 'Пётр Петров',
-    department: 'Отдел продаж',
-    post: 'Аккаунт менеджер',
-  },
-
-  {
-    name: 'Андрей Андреев',
-    department: 'Отдел разработки',
-    post: 'Тимлид',
-  },
-
-  {
-    name: 'Соня Мирная',
-    department: 'Отдел разработки',
-    post: 'Дизайнер',
-  },
-]

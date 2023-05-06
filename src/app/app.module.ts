@@ -3,10 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LayoutModule } from './layout/layout.module';
-import { RoomsPageModule } from './pages/rooms/rooms.module';
-import { EmployeesPageModule } from './pages/employees/employees.module';
-import { CalendarPageModule } from './pages/calendar/calendar.module'
+import { RoomsPageModule } from './cabinet/pages/rooms/rooms.module';
+import { CalendarPageModule } from './cabinet/pages/calendar/calendar.module'
+import { CabinetLayoutModule } from './cabinet/cabinet-layout.module'
 
 @NgModule({
   declarations: [
@@ -15,10 +14,9 @@ import { CalendarPageModule } from './pages/calendar/calendar.module'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LayoutModule,
     RoomsPageModule,
-    EmployeesPageModule,
     CalendarPageModule,
+    CabinetLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

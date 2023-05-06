@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainLayoutComponent } from 'src/app/layout/layout.component';
-import { CalendarPageComponent } from './calendar.page';
+import { RoomsPageComponent } from './rooms.page';
+import { TableCalendarComponent } from '../../components/table-calendar/table-calendar.component';
 
 const routes: Routes = [
   {
-    path: 'calendar',
+    path: 'rooms',
     component: MainLayoutComponent,
     children: [
-      { path: '', component: CalendarPageComponent }
+      { path: '', component: RoomsPageComponent },
+      { path: ':id', component: TableCalendarComponent}
     ]
   }
 ];
@@ -17,4 +19,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CalendarPageRoutingModule { }
+export class RoomsPagedRoutingModule { }

@@ -1,0 +1,5 @@
+<ng-container>
+  <div class="buttons__container">
+    <button class="page__button" *ngFor="let room of rooms" routerLink="{{room.id}}">Переговорка {{room.id}}</button>
+  </div>
+</ng-container>
