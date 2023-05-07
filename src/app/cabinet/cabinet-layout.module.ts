@@ -5,6 +5,12 @@ import { MenuComponent } from "../cabinet/components/menu/menu.component";
 import { EmployeeComponent } from "../cabinet/components/employee/employee.component";
 import { EmployeesPageComponent } from "./pages/employees/employees.page";
 import { CommonModule } from "@angular/common";
+import { CalendarPageComponent } from "./pages/calendar/calendar.page";
+import { DayCalendarComponent } from "./components/table-calendar/day-calendar/day-calendar.component";
+import { TableCalendarModule } from "./components/table-calendar/table-calendar.module";
+import { RoomsPageComponent } from "./pages/rooms/rooms.page";
+import { MainPageComponent } from "./pages/main/main.page";
+import { NotFoundPage } from "./pages/not-found/not-found.page";
 
 
 @NgModule({
@@ -12,11 +18,18 @@ import { CommonModule } from "@angular/common";
         CabinetLayoutComponent,
         MenuComponent,
         EmployeeComponent,
-        EmployeesPageComponent
+        EmployeesPageComponent,
+        CalendarPageComponent,
+        CalendarPageComponent,
+        DayCalendarComponent,
+        RoomsPageComponent,
+        MainPageComponent,
+        NotFoundPage
     ],
     imports: [
         routing,
-        CommonModule
+        CommonModule,
+        TableCalendarModule
     ],
     providers: [],
   })

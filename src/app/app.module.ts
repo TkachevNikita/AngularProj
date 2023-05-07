@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RoomsPageModule } from './cabinet/pages/rooms/rooms.module';
-import { CalendarPageModule } from './cabinet/pages/calendar/calendar.module'
 import { CabinetLayoutModule } from './cabinet/cabinet-layout.module'
 
 @NgModule({
@@ -14,8 +12,6 @@ import { CabinetLayoutModule } from './cabinet/cabinet-layout.module'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RoomsPageModule,
-    CalendarPageModule,
     CabinetLayoutModule,
   ],
   providers: [],

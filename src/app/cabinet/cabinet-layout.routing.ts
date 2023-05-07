@@ -5,6 +5,8 @@ import { EmployeesPageComponent } from "../cabinet/pages/employees/employees.pag
 import { CalendarPageComponent } from "../cabinet/pages/calendar/calendar.page";
 import { RoomsPageComponent } from "../cabinet/pages/rooms/rooms.page";
 import { TableCalendarComponent } from "../cabinet/components/table-calendar/table-calendar.component";
+import { MainPageComponent } from "./pages/main/main.page";
+import { NotFoundPage } from "./pages/not-found/not-found.page";
 
 const routes: Routes = [
   {
@@ -13,7 +15,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'employees',
+        component: MainPageComponent,
         pathMatch: 'full'
       },
       {
@@ -30,6 +32,10 @@ const routes: Routes = [
         children: [
           { path: ':id', component: TableCalendarComponent }
         ]
+      },
+      {
+        path: '**',
+        component: NotFoundPage
       }
     ]
   }

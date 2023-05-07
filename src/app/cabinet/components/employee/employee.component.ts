@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Departments } from 'src/app/enums/department.enums';
 import { Professions } from 'src/app/enums/profession.enums';
 import { IEmployee } from 'src/app/interfaces/employess.interface';
 import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
@@ -15,7 +16,8 @@ export class EmployeeComponent {
     surname: '',
     age: 0,
     profession: Professions.programmer,
-    salary: 0
+    salary: 0,
+    department: Departments.first
   }
 
   @Input() employee: EmployeeModel;

@@ -17,7 +17,6 @@ export class EmployeeService {
 
     return this.requestEmployee()
       .pipe(
-        delay(1500),
         map((data: IEmployee[]) => data.map((employee: IEmployee) => new EmployeeModel(employee)))
       );
   }
@@ -30,35 +29,40 @@ export class EmployeeService {
         name: 'Oleg',
         surname: 'Chikev',
         salary: 3000,
-        profession: 'programmer'
+        profession: 'programmer',
+        department: 'department 1'
       },
       {
         age: 36,
         name: 'Ivan',
         surname: 'Samoylov',
         salary: 4000,
-        profession: 'programmer'
+        profession: 'programmer',
+        department: 'department 2'
       },
       {
         age: 26,
         name: 'Grisha',
         surname: 'Petrov',
         salary: 3000,
-        profession: 'programmer'
+        profession: 'programmer',
+        department: 'department 2'
       },
       {
         age: 27,
         name: 'Nikita',
         surname: 'Batuev',
         salary: 1700,
-        profession: 'manager'
+        profession: 'manager',
+        department: 'department 3'
       },
       {
         age: 37,
         name: 'Artem',
         surname: 'Nikolsk',
         salary: 7000,
-        profession: 'programmer'
+        profession: 'programmer',
+        department: 'department 1'
       }
     ];
 
