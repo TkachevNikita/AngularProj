@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Departments } from 'src/app/enums/department.enums';
 import { Professions } from 'src/app/enums/profession.enums';
 import { IEmployee } from 'src/app/interfaces/employess.interface';
@@ -13,19 +14,11 @@ import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
 })
 
 export class EmployeesPageComponent {
-  data: IEmployee = {
-    name: '',
-    surname: '',
-    age: 0,
-    profession: Professions.programmer,
-    salary: 0,
-    department: Departments.first
-  }
-  public employees: EmployeeModel[] = [new EmployeeModel(this.data)]
+
+  public employees$!: Observable<EmployeeModel[]>;
 
   constructor(private employeeService: EmployeeService) {
-    employeeService.getEmployees().subscribe(
-      employeeList => this.employees = employeeList)
-
+    this.employees$ = employeeService.getEmployees();
   }
+
 }

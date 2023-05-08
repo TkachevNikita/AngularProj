@@ -7,6 +7,7 @@ import { RoomsPageComponent } from "../cabinet/pages/rooms/rooms.page";
 import { TableCalendarComponent } from "../cabinet/components/table-calendar/table-calendar.component";
 import { MainPageComponent } from "./pages/main/main.page";
 import { NotFoundPage } from "./pages/not-found/not-found.page";
+import { DemoComponent } from "./pages/custom-calendar/custom-calendar.component";
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
       },
       {
         path: 'calendar',
-        component: CalendarPageComponent,
+        component: DemoComponent,
       },
       {
         path: 'rooms',

@@ -11,6 +11,10 @@ import { TableCalendarModule } from "./components/table-calendar/table-calendar.
 import { RoomsPageComponent } from "./pages/rooms/rooms.page";
 import { MainPageComponent } from "./pages/main/main.page";
 import { NotFoundPage } from "./pages/not-found/not-found.page";
+import { CalendarModule, DateAdapter } from "angular-calendar";
+import { adapterFactory } from "angular-calendar/date-adapters/date-fns";
+import { DemoModule } from "./pages/custom-calendar/custom-calendar.module";
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -29,7 +33,12 @@ import { NotFoundPage } from "./pages/not-found/not-found.page";
     imports: [
         routing,
         CommonModule,
-        TableCalendarModule
+        TableCalendarModule,
+        CalendarModule.forRoot({
+          provide: DateAdapter,
+          useFactory: adapterFactory,
+        }),
+        DemoModule,
     ],
     providers: [],
   })

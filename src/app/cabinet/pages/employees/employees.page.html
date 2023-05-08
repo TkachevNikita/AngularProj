@@ -1,5 +1,7 @@
-<div class="container">
-  <app-employee *ngFor="let emp of employees" [employee]="emp">
+<ng-container *ngIf="employees$ | async as employees">
+  <div class="container">
+    <app-employee *ngFor="let emp of employees" [employee]="emp">
 
-  </app-employee>
-</div>
+    </app-employee>
+  </div>
+</ng-container>
