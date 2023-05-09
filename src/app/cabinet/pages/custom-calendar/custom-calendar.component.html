@@ -94,7 +94,8 @@
 </div>
 
 <!-- форму -->
-<form [formGroup]="eventForm">
-  <input type="text" [formControlName]="'title'">
-  <button (click)="onSubmit()">Создать</button>
-</form>
+
+
+<app-form-dialog *ngIf="isOpen" (closeModalEvent)="onClose()">
+  <app-form (submitEvent)="onSubmit($event)"></app-form>
+</app-form-dialog>

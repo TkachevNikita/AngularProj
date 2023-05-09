@@ -162,9 +162,11 @@ export class DemoComponent {
     });
   }
 
-  public onSubmit(): void {
-    this.eventForm.value.start = this.currentDay;
-    this.addEvent(this.eventForm.value);
+  public onSubmit(event: CalendarEvent): void {
+    event.start = this.currentDay;
+    this.addEvent(event)
+    this.onClose()
+    console.log(event);
   }
 
   /**
@@ -183,6 +185,7 @@ export class DemoComponent {
       this.viewDate = date;
       this.currentDay = new Date(date.getFullYear(), date.getMonth(), date.getDate())
     }
+    this.openModal();
   }
 
   eventTimesChanged({
@@ -208,11 +211,11 @@ export class DemoComponent {
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  addEvent(event: CalendarEvent): void {
+  addEvent(event: any): void {
     this.events = [
       ...this.events,
       {
-        title: event.title,
+        title: event.eventTitle,
         start: startOfDay(event.start),
         color: colors['red'],
         draggable: true,
@@ -236,7 +239,14 @@ export class DemoComponent {
     this.activeDayIsOpen = false;
   }
 
+  isOpen = false;
 
+  openModal() {
+    this.isOpen = true;
+  }
 
+  onClose() {
+    this.isOpen = false;
+  }
 
 }

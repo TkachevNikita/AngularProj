@@ -6,6 +6,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DemoComponent } from './custom-calendar.component';
+import { FormDialogComponent } from '../../components/dialogs/form-dialog.component';
+import { FormComponent } from '../../components/form/form.component';
 
 @NgModule({
   imports: [
@@ -19,7 +21,7 @@ import { DemoComponent } from './custom-calendar.component';
     }),
     ReactiveFormsModule
   ],
-  declarations: [DemoComponent],
+  declarations: [DemoComponent, FormDialogComponent, FormComponent],
   exports: [DemoComponent],
 })
 export class DemoModule {}

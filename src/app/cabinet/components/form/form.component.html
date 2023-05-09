@@ -1,0 +1,18 @@
+<form class="form" [formGroup]="eventForm">
+  <div class="form__group">
+    <label for="eventTitle">Название мероприятия:</label>
+    <input id="eventTitle" type="text" [formControlName]="'eventTitle'">
+  </div>
+  <div class="form__group">
+    <label for="eventStart">Начало:</label>
+    <select id="eventStart" [formControlName]="'start'">
+      <option value="13">13:00</option>
+      <option value="14">14:00</option>
+    </select>
+  </div>
+  <div class="form__group">
+    <label for="eventDuration">Продолжительность:</label>
+    <input id="eventDuration" type="number" [formControlName]="'eventDuration'">
+  </div>
+  <button (click)="onSubmit()">Создать</button>
+</form>
