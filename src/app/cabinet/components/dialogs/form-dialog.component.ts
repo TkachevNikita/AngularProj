@@ -6,8 +6,6 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
     styleUrls: ['./styles/form-dialog.component.scss'],
 })
 
-
-
 export class FormDialogComponent {
   @Input() isOpenModal = false;
   @Output() closeModalEvent = new EventEmitter<boolean>();

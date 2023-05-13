@@ -14,12 +14,13 @@ export class FormComponent {
   constructor() {
     this.eventForm = new FormGroup({
       eventTitle: new FormControl(),
-      start: new FormControl(),
+      eventMembers: new FormControl(),
       eventDuration: new FormControl()
     });
   }
 
   public onSubmit(): void {
     this.submitEvent.emit(this.eventForm.value)
+    console.log(this.eventForm.value);
   }
 }

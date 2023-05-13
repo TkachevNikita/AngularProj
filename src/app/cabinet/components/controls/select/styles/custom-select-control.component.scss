@@ -1,0 +1,44 @@
+.select {
+  position: relative;
+  height: 25px;
+}
+
+.select,
+.select__dropdown {
+  outline: 1px solid black;
+}
+
+.select__dropdown {
+  display: none;
+  position: absolute;
+  width: 100%;
+  background-color: white;
+}
+
+.openDropDown {
+  display: block;
+}
+
+.select__option,
+.select__current {
+  cursor: pointer;
+  padding: 0 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.select__current {
+  display: flex;
+  height: 100%;
+}
+
+.select__selected {
+  background-color: #d6d6d6;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+
+.select__selected:not(:last-child) {
+  margin-right: 5px;
+}

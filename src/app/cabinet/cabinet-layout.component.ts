@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
-import { BehaviorSubject } from "rxjs";
+import { NavigationEnd, Router } from "@angular/router";
+import { BehaviorSubject, filter } from "rxjs";
 
 @Component({
     templateUrl: './cabinet-layout.component.html',
@@ -8,13 +8,10 @@ import { BehaviorSubject } from "rxjs";
 })
 export class CabinetLayoutComponent {
 
-  public title$: BehaviorSubject<string> = new BehaviorSubject<string>('Title');
+  public title$: BehaviorSubject<string> = new BehaviorSubject<string>('Главная страница');
 
   constructor(private _router: Router) {
-    this._router.events
-      .pipe(
-
-      )
+    this._router.events.pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(
         {
           next: (value: any) => {
@@ -31,9 +28,11 @@ export class CabinetLayoutComponent {
               case '/cabinet/rooms':
                 this.title$.next('Переговорные комнаты');
                 break;
-            }
+              default:
+                this.title$.next('Страница не найдена')
+                break;
           }
         }
-      )
+    });
   }
 }

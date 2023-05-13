@@ -8,6 +8,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DemoComponent } from './custom-calendar.component';
 import { FormDialogComponent } from '../../components/dialogs/form-dialog.component';
 import { FormComponent } from '../../components/form/form.component';
+import { SelectComponent } from '../../components/controls/select/custom-select-control.component';
 
 @NgModule({
   imports: [
@@ -19,9 +20,14 @@ import { FormComponent } from '../../components/form/form.component';
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  declarations: [DemoComponent, FormDialogComponent, FormComponent],
+  declarations: [
+    DemoComponent,
+    FormDialogComponent,
+    FormComponent,
+    SelectComponent
+  ],
   exports: [DemoComponent],
 })
 export class DemoModule {}

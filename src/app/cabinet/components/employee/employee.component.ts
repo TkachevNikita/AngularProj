@@ -11,17 +11,5 @@ import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
 })
 
 export class EmployeeComponent {
-  data: IEmployee = {
-    name: '',
-    surname: '',
-    age: 0,
-    profession: Professions.programmer,
-    salary: 0,
-    department: Departments.first
-  }
-
-  @Input() employee: EmployeeModel;
-  constructor() {
-    this.employee = new EmployeeModel(this.data);
-  }
+  @Input() employee!: EmployeeModel;
 }

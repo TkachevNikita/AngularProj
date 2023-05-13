@@ -14,7 +14,6 @@ import { NotFoundPage } from "./pages/not-found/not-found.page";
 import { CalendarModule, DateAdapter } from "angular-calendar";
 import { adapterFactory } from "angular-calendar/date-adapters/date-fns";
 import { DemoModule } from "./pages/custom-calendar/custom-calendar.module";
-import { ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -28,7 +27,7 @@ import { ReactiveFormsModule } from "@angular/forms";
         DayCalendarComponent,
         RoomsPageComponent,
         MainPageComponent,
-        NotFoundPage
+        NotFoundPage,
     ],
     imports: [
         routing,

@@ -4,11 +4,8 @@
     <input id="eventTitle" type="text" [formControlName]="'eventTitle'">
   </div>
   <div class="form__group">
-    <label for="eventStart">Начало:</label>
-    <select id="eventStart" [formControlName]="'start'">
-      <option value="13">13:00</option>
-      <option value="14">14:00</option>
-    </select>
+    <label for="eventStart">Участники:</label>
+    <app-select [formControlName]="'eventMembers'"></app-select>
   </div>
   <div class="form__group">
     <label for="eventDuration">Продолжительность:</label>

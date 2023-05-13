@@ -1,5 +1,13 @@
 <ng-container *ngIf="employees$ | async as employees">
   <div class="container">
+    <div class="sort">
+      <span>Сортировать по:</span>
+      <div class="buttons__container">
+        <button (click)="sortByName()">По имени</button>
+        <button (click)="sortByDepartment()">По отделу</button>
+        <button (click)="sortByProfession()">По должности</button>
+      </div>
+    </div>
     <app-employee *ngFor="let emp of employees" [employee]="emp">
 
     </app-employee>
