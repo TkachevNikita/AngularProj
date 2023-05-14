@@ -47,6 +47,7 @@ export class SelectComponent implements ControlValueAccessor {
         this.dropDownIsOpen = true;
         break;
     }
+    this.onTouched();
   }
 
   public onSelect(event: MouseEvent) {

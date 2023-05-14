@@ -6,7 +6,7 @@
   </div>
   <div class="select__dropdown" [ngClass]="{'openDropDown': dropDownIsOpen}">
     <ul class="select__list">
-      <li class="select__option" (click)="onSelect($event)" *ngFor="let employee of employees">{{employee.name}} {{employee.surname}}</li>
+      <li class="select__option" (click)="onSelect($event);" *ngFor="let employee of employees">{{employee.name}} {{employee.surname}}</li>
     </ul>
   </div>
 </div>

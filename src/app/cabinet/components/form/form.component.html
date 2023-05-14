@@ -1,15 +1,30 @@
 <form class="form" [formGroup]="eventForm">
   <div class="form__group">
     <label for="eventTitle">Название мероприятия:</label>
+    <div
+      class="error-message"
+      *ngIf="eventForm.get('eventTitle')?.touched && eventForm.get('eventTitle')?.errors?['required'] : null">
+      Обязательное поле*
+    </div>
     <input id="eventTitle" type="text" [formControlName]="'eventTitle'">
   </div>
   <div class="form__group">
     <label for="eventStart">Участники:</label>
+    <div
+      class="error-message"
+      *ngIf="eventForm.get('eventMembers')?.touched && eventForm.get('eventMembers')?.errors?['required'] : null">
+      Обязательное поле*
+    </div>
     <app-select [formControlName]="'eventMembers'"></app-select>
   </div>
   <div class="form__group">
     <label for="eventDuration">Продолжительность:</label>
+    <div
+      class="error-message"
+      *ngIf="eventForm.get('eventDuration')?.touched && eventForm.get('eventDuration')?.errors?['required'] : null">
+      Обязательное поле*
+    </div>
     <input id="eventDuration" type="number" [formControlName]="'eventDuration'">
   </div>
-  <button (click)="onSubmit()">Создать</button>
+  <button (click)="onSubmit()" [disabled]="eventForm.invalid">Создать</button>
 </form>

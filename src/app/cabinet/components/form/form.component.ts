@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { CalendarEvent } from "angular-calendar";
 
 @Component({
@@ -13,9 +13,9 @@ export class FormComponent {
 
   constructor() {
     this.eventForm = new FormGroup({
-      eventTitle: new FormControl(),
-      eventMembers: new FormControl(),
-      eventDuration: new FormControl()
+      eventTitle: new FormControl('', Validators.required),
+      eventMembers: new FormControl('', Validators.required),
+      eventDuration: new FormControl('', Validators.required)
     });
   }
 

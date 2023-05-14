@@ -1,6 +1,4 @@
-<!-- навигация -->
-<button class="btn-event" (click)="openModal()" [disabled]="!dayIsClicked" >Создать</button>
-<div class="row text-center">
+<!-- <div class="row text-center">
   <div class="col-md-4">
     <div class="btn-group">
       <div
@@ -58,46 +56,4 @@
       </div>
     </div>
   </div>
-</div>
-<br />
-
-<!-- Вынести в отдельный компонет! -->
-<ng-container *ngIf="events$ | async as e">
-  <div [ngSwitch]="view">
-    <mwl-calendar-month-view
-      *ngSwitchCase="CalendarView.Month"
-      [viewDate]="viewDate"
-      [events]="e"
-      [activeDayIsOpen]="activeDayIsOpen"
-      (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="eventClicked($event)"
-    >
-    </mwl-calendar-month-view>
-    <mwl-calendar-week-view
-      *ngSwitchCase="CalendarView.Week"
-      [viewDate]="viewDate"
-      [events]="e"
-      (eventClicked)="eventClicked($event)"
-    >
-    </mwl-calendar-week-view>
-    <mwl-calendar-day-view
-      *ngSwitchCase="CalendarView.Day"
-      [viewDate]="viewDate"
-      [events]="e"
-      (eventClicked)="eventClicked($event)"
-    >
-    </mwl-calendar-day-view>
-  </div>
-</ng-container>
-
-<app-form-dialog *ngIf="modalIsOpen" (closeModalEvent)="closeModal()">
-  <app-form (submitEvent)="onSubmit($event)"></app-form>
-</app-form-dialog>
-
-<app-event-dialog
-  [members]="currentMembers"
-  [title]="currentTitle"
-  [isEventDialogOpen]="eventDialogIsOpen"
-  (isEventDialogClose)="closeEventDialog()"
->
-</app-event-dialog>
+</div> -->

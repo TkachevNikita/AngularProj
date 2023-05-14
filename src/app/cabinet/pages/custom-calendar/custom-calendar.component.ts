@@ -2,8 +2,7 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef,
+  OnInit,
 } from '@angular/core';
 import {
   startOfDay,
@@ -15,7 +14,7 @@ import {
   isSameMonth,
   addHours,
 } from 'date-fns';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -24,6 +23,7 @@ import {
 } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -43,38 +43,44 @@ const colors: Record<string, EventColor> = {
 @Component({
   selector: 'mwl-demo-component',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [LocalStorageService],
   styleUrls: ['styles/custom-calendar.component.scss'],
   templateUrl: 'custom-calendar.component.html',
 })
-export class DemoComponent {
-
-  // 1. убрать лишний код
-  // 2 .вынести в отдельный компоненты
+export class DemoComponent implements OnInit {
   public currentDay!: Date;
-  view: CalendarView = CalendarView.Month;
-
-  CalendarView = CalendarView;
-
-  viewDate: Date = new Date();
-
-  events: any = [];
+  public view: CalendarView = CalendarView.Month;
+  public CalendarView = CalendarView;
+  public viewDate: Date = new Date();
+  public events$: BehaviorSubject<CalendarEvent<any>[]> = new BehaviorSubject<CalendarEvent<any>[]>([]);
   public activeDayIsOpen = false;
+  public dayIsClicked = false;
+  public currentTitle!: string;
+  public currentMembers!: string[];
+  public modalIsOpen: boolean = false;
+  public eventDialogIsOpen: boolean = false;
 
-  constructor(private modal: NgbModal) {
-    const data = localStorage.getItem('event');
-    if (data !== null) {
-      const events = JSON.parse(data);
-      events.forEach((element: any) => {
-        this.addEvent(element);
-      });
+  constructor(private modal: NgbModal, private storage: LocalStorageService) { }
+
+  public ngOnInit(): void {
+    const data = this.storage.getItem('event');
+    if (data) {
+      this.refactorDate(data);
+      this.events$.next(data);
     }
+  }
+
+  public refactorDate(data: CalendarEvent[]): void {
+    data.forEach((element: CalendarEvent) => {
+      element.start = new Date(element.start)
+      element.end = new Date(element.end as unknown as string)
+   });
   }
 
   public onSubmit(event: CalendarEvent): void {
     event.start = new Date(this.currentDay);
-    this.addEvent(event)
-    this.closeModal()
-    console.log(event);
+    this.addEvent(event);
+    this.closeModal();
   }
 
   /**
@@ -93,28 +99,36 @@ export class DemoComponent {
       this.viewDate = date;
       this.currentDay = new Date(date.getFullYear(), date.getMonth(), date.getDate())
     }
-    this.openModal();
+    this.dayIsClicked = true;
   }
 
   addEvent(event: any): void {
-    this.events = [
-      ...this.events,
+    this.events$.next([
+      ...this.events$.getValue(),
       {
         title: event.eventTitle,
         start: new Date(event.start),
+        end: new Date(event.start),
         color: colors['red'],
         draggable: true,
         resizable: {
           beforeStart: true,
           afterEnd: true,
         },
+        members: event.eventMembers
       },
-    ];
-    localStorage.setItem('event', JSON.stringify(this.events))
+    ]);
+    this.storage.setItem('event', JSON.stringify(this.events$.getValue()));
+  }
+
+  eventClicked(event: any) {
+    this.currentMembers = event.event.members;
+    this.currentTitle = event.event.title;
+    this.openEventDialog();
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event: any) => event !== eventToDelete);
+    this.events$.next(this.events$.getValue().filter((event: any) => event !== eventToDelete));
   }
 
   setView(view: CalendarView) {
@@ -125,7 +139,13 @@ export class DemoComponent {
     this.activeDayIsOpen = false;
   }
 
-  public modalIsOpen = false;
+  public openEventDialog() {
+    this.eventDialogIsOpen = true;
+  }
+
+  public closeEventDialog() {
+    this.eventDialogIsOpen = false;
+  }
 
   public openModal() {
     this.modalIsOpen = true;
