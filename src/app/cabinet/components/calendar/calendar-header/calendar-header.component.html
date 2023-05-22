@@ -6,7 +6,7 @@
         mwlCalendarPreviousView
         [view]="view"
         [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()"
+        (viewDateChange)="closeOpenMonthView()"
       >
         Previous
       </div>
@@ -22,7 +22,7 @@
         mwlCalendarNextView
         [view]="view"
         [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()"
+        (viewDateChange)="closeOpenMonthView()"
       >
         Next
       </div>
@@ -35,22 +35,22 @@
     <div class="btn-group">
       <div
         class="btn btn-primary btn-right"
-        (click)="setView(CalendarView.Month)"
-        [class.active]="view === CalendarView.Month"
+        (click)="monthView(CalendarView?.Month)"
+        [class.active]="view === CalendarView?.Month"
       >
         Month
       </div>
       <div
         class="btn btn-primary btn-right"
-        (click)="setView(CalendarView.Week)"
-        [class.active]="view === CalendarView.Week"
+        (click)="weekView(CalendarView?.Week)"
+        [class.active]="view === CalendarView?.Week"
       >
         Week
       </div>
       <div
         class="btn btn-primary btn-right"
-        (click)="setView(CalendarView.Day)"
-        [class.active]="view === CalendarView.Day"
+        (click)="dayView(CalendarView?.Day)"
+        [class.active]="view === CalendarView?.Day"
       >
         Day
       </div>

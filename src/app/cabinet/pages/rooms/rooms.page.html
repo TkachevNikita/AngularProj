@@ -1,5 +1,7 @@
 <ng-container>
-  <div class="buttons__container">
-    <button class="page__button" *ngFor="let room of rooms" routerLink="{{room.id}}">Переговорка {{room.id}}</button>
+  <div class="buttons__container" *ngIf="!choiceIsClose">
+    <button class="page__button" *ngFor="let room of rooms" (click)="clickRoute(room)">Переговорка {{room}}</button>
   </div>
+  <mwl-demo-component [calendarViewModel]="model" *ngIf="choiceIsClose"></mwl-demo-component>
 </ng-container>
+

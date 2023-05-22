@@ -1,17 +1,19 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class LocalStorageService {
 
-    public getItem(item: string) {
-      const data = localStorage.getItem(item);
-      if (data) {
-        return JSON.parse(data);
-      }
+
+    public getItem(key: string): string {
+        const data = localStorage.getItem(key);
+        if (data) {
+            return JSON.parse(data);
+        }
+
+        return '';
     }
 
-    public setItem(item: string, value: string) {
-      return localStorage.setItem(item, value);
+    public setItem(key: string, value: string): void {
+        return localStorage.setItem(key, value);
     }
-
 }

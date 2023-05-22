@@ -27,19 +27,14 @@ export class EmployeeModel {
     switch (key) {
       case 'programmer':
         return Professions.programmer
-        break;
       case 'manager':
         return Professions.manager
-        break;
       case 'analyst':
         return Professions.analyst
-        break;
       case 'qaengineer':
         return Professions.qaengineer
-        break;
       default:
         return Professions.analyst;
-        break;
     }
   }
 
@@ -47,16 +42,12 @@ export class EmployeeModel {
     switch (key) {
       case 'department 1':
         return Departments.first;
-        break;
       case 'department 2':
         return Departments.second;
-        break;
       case 'department 3':
         return Departments.third;
-        break;
       default:
         return Departments.first
-        break;
     }
   }
 
