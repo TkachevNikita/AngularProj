@@ -5,4 +5,7 @@ export interface IEmployee {
     profession: string,
     salary: number
     department: string;
+    role?: string;
+    id: number;
+    isAuth?: boolean;
 }

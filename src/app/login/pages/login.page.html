@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="container__form">
+    <h2 class="title">Авторизация</h2>
+    <form [formGroup]="loginForm">
+      <div class="form__group">
+        <label for="employee">Сотрудник:</label>
+        <div
+          class="error-message"
+          *ngIf="loginForm.get('loginEmployee')?.touched && loginForm.get('loginEmployee')?.errors?['required'] : null">
+          Обязательное поле*
+        </div>
+        <app-select id="employee" formControlName="loginEmployee" [multiple]="false"></app-select>
+      </div>
+      <div class="form__group">
+        <label for="password">Пароль:</label>
+        <div
+          class="error-message"
+          *ngIf="loginForm.get('loginPassword')?.touched && loginForm.get('loginPassword')?.errors?['required'] : null">
+          Обязательное поле*
+        </div>
+        <input id="password" type="password" formControlName="loginPassword">
+      </div>
+      <button type="submit" (click)="onSubmit()" [disabled]="loginForm.invalid">Войти</button>
+    </form>
+  </div>
+</div>

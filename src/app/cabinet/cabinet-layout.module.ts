@@ -6,15 +6,13 @@ import { EmployeeComponent } from '../cabinet/components/employee/employee.compo
 import { EmployeesPageComponent } from './pages/employees/employees.page';
 import { CommonModule } from '@angular/common';
 import { CalendarPageComponent } from './pages/calendar/calendar.page';
-import { DayCalendarComponent } from './components/table-calendar/day-calendar/day-calendar.component';
-import { TableCalendarModule } from './components/table-calendar/table-calendar.module';
 import { RoomsPageComponent } from './pages/rooms/rooms.page';
 import { MainPageComponent } from './pages/main/main.page';
 import { NotFoundPage } from './pages/not-found/not-found.page';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { DemoModule } from './pages/custom-calendar/custom-calendar.module';
-import { DataSendService } from '../services/data-send.service';
+import { RoomsCalendarComponent } from './pages/rooms/components/rooms-calendar/rooms-calendar.component';
 
 
 @NgModule({
@@ -25,22 +23,20 @@ import { DataSendService } from '../services/data-send.service';
         EmployeesPageComponent,
         CalendarPageComponent,
         CalendarPageComponent,
-        DayCalendarComponent,
         RoomsPageComponent,
         MainPageComponent,
         NotFoundPage,
+        RoomsCalendarComponent,
     ],
     imports: [
         routing,
         CommonModule,
-        TableCalendarModule,
         CalendarModule.forRoot({
             provide: DateAdapter,
             useFactory: adapterFactory,
         }),
         DemoModule,
     ],
-    providers: [DataSendService],
 })
 export class CabinetLayoutModule {
 

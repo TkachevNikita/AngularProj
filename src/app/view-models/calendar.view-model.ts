@@ -9,8 +9,9 @@ export class CalendarViewModel {
     /** Текущий день */
     public currentDay!: Date;
     public view: CalendarView;
+    public calendarView;
     public viewDate!: Date;
-    public events$!: BehaviorSubject<CalendarEvent<any>[]>;
+    public events$!: BehaviorSubject<CalendarEvent[]>;
     public activeDayIsOpen: boolean;
     public dayIsClicked: boolean;
     public currentTitle!: string;
@@ -20,10 +21,11 @@ export class CalendarViewModel {
     public id!: EventsKey;
     public color!: EventColor;
 
-    constructor(events: CalendarEvent<any>[] | []) {
+    constructor(events: CalendarEvent[] | []) {
+        this.calendarView = CalendarView;
         this.view = CalendarView.Month;
         this.viewDate = new Date();
-        this.events$ = new BehaviorSubject<CalendarEvent<any>[]>(events);
+        this.events$ = new BehaviorSubject<CalendarEvent[]>(events);
         this.activeDayIsOpen = false;
         this.dayIsClicked = false;
         this.modalIsOpen = false;

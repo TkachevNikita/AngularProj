@@ -11,7 +11,8 @@ import { FormComponent } from '../../components/form/form.component';
 import { SelectComponent } from '../../components/controls/select/custom-select-control.component';
 import { EventDialogComponent } from '../../components/dialogs/event-dialog/event-dialog.component';
 import { CalendarHeaderComponent } from '../../components/calendar/calendar-header/calendar-header.component';
-import { DataSendService } from 'src/app/services/data-send.service';
+import { ModalServiceModule } from 'src/app/libs/modal-service/modal.module';
+import { AppSelectModule } from '../../components/controls/select/custom-select-control.module';
 
 @NgModule({
     imports: [
@@ -24,14 +25,15 @@ import { DataSendService } from 'src/app/services/data-send.service';
             useFactory: adapterFactory,
         }),
         ReactiveFormsModule,
+        ModalServiceModule,
+        AppSelectModule
     ],
     declarations: [
         DemoComponent,
         FormDialogComponent,
         FormComponent,
-        SelectComponent,
         EventDialogComponent,
-        CalendarHeaderComponent
+        CalendarHeaderComponent,
     ],
     exports: [DemoComponent],
 })

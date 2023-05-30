@@ -40,22 +40,22 @@
     <div class="btn-group">
       <div
         class="btn btn-primary btn-right"
-        (click)="setView(this.calendarViewModel.CalendarView.Month)"
-        [class.active]="this.calendarViewModel.view === this.calendarViewModel.CalendarView.Month"
+        (click)="setView(this.calendarViewModel.calendarView.Month)"
+        [class.active]="this.calendarViewModel.view === this.calendarViewModel.calendarView.Month"
       >
         Month
       </div>
       <div
         class="btn btn-primary btn-right"
-        (click)="setView(this.calendarViewModel.CalendarView.Week)"
-        [class.active]="this.calendarViewModel.view === this.calendarViewModel.CalendarView.Week"
+        (click)="setView(this.calendarViewModel.calendarView.Week)"
+        [class.active]="this.calendarViewModel.view === this.calendarViewModel.calendarView.Week"
       >
         Week
       </div>
       <div
         class="btn btn-primary btn-right"
-        (click)="setView(this.calendarViewModel.CalendarView.Day)"
-        [class.active]="this.calendarViewModel.view === this.calendarViewModel.CalendarView.Day"
+        (click)="setView(this.calendarViewModel.calendarView.Day)"
+        [class.active]="this.calendarViewModel.view === this.calendarViewModel.calendarView.Day"
       >
         Day
       </div>
@@ -63,22 +63,11 @@
   </div>
 </div>
 
-<!-- <app-calendar-header
-  [view]="view"
-  [viewDate]="viewDate"
-  [CalendarView]="CalendarView"
-  (closeOpenMonth)="closeOpenMonthViewDay()"
-  (setViewMonth)="setView(CalendarView.Month)"
-  (setViewWeek)="setView(CalendarView.Week)"
-  (setViewDay)="setView(CalendarView.Day)"
-></app-calendar-header>
-<br /> -->
-
 <!-- Вынести в отдельный компонет! -->
 <ng-container *ngIf="calendarViewModel.events$ | async as e">
   <div [ngSwitch]="this.calendarViewModel.view">
     <mwl-calendar-month-view
-      *ngSwitchCase="this.calendarViewModel.CalendarView.Month"
+      *ngSwitchCase="this.calendarViewModel.calendarView.Month"
       [viewDate]="this.calendarViewModel.viewDate"
       [events]="e"
       [activeDayIsOpen]="this.calendarViewModel.activeDayIsOpen"
@@ -87,14 +76,14 @@
     >
     </mwl-calendar-month-view>
     <mwl-calendar-week-view
-      *ngSwitchCase="this.calendarViewModel.CalendarView.Week"
+      *ngSwitchCase="this.calendarViewModel.calendarView.Week"
       [viewDate]="this.calendarViewModel.viewDate"
       [events]="e"
       (eventClicked)="eventClicked($event)"
     >
     </mwl-calendar-week-view>
     <mwl-calendar-day-view
-      *ngSwitchCase="this.calendarViewModel.CalendarView.Day"
+      *ngSwitchCase="this.calendarViewModel.calendarView.Day"
       [viewDate]="this.calendarViewModel.viewDate"
       [events]="e"
       (eventClicked)="eventClicked($event)"
@@ -114,3 +103,5 @@
   (isEventDialogClose)="closeEventDialog()"
 >
 </app-event-dialog>
+
+

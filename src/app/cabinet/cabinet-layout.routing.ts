@@ -2,12 +2,11 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CabinetLayoutComponent } from './cabinet-layout.component';
 import { EmployeesPageComponent } from '../cabinet/pages/employees/employees.page';
-import { CalendarPageComponent } from '../cabinet/pages/calendar/calendar.page';
 import { RoomsPageComponent } from '../cabinet/pages/rooms/rooms.page';
-import { TableCalendarComponent } from '../cabinet/components/table-calendar/table-calendar.component';
 import { MainPageComponent } from './pages/main/main.page';
 import { NotFoundPage } from './pages/not-found/not-found.page';
 import { DemoComponent } from './pages/custom-calendar/components/custom-calendar.component';
+import { RoomsCalendarComponent } from './pages/rooms/components/rooms-calendar/rooms-calendar.component';
 
 const routes: Routes = [
     {
@@ -30,9 +29,13 @@ const routes: Routes = [
             {
                 path: 'rooms',
                 component: RoomsPageComponent,
-                children: [
-                    { path: ':id', component: DemoComponent }
-                ]
+                // children: [
+                //     { path: ':id', component: RoomsCalendarComponent }
+                // ]
+            },
+            {
+                path: 'rooms/:id',
+                component: RoomsCalendarComponent
             },
             {
                 path: '**',

@@ -8,11 +8,15 @@
   outline: 1px solid black;
 }
 
+.select__dropdown,
+.select__current {
+  background-color: white;
+}
+
 .select__dropdown {
   display: none;
   position: absolute;
   width: 100%;
-  background-color: white;
 }
 
 .openDropDown {
@@ -34,7 +38,6 @@
 }
 
 .select__selected {
-  background-color: #d6d6d6;
   padding: 0 5px;
   border-radius: 5px;
 }

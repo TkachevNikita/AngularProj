@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EmployeeModel } from '../view-models/employee/employee.model';
-import { Professions } from '../enums/profession.enums';
 import { IEmployee } from '../interfaces/employess.interface';
-import { Observable, catchError, delay, map, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -30,7 +29,8 @@ export class EmployeeService {
                 surname: 'Chikev',
                 salary: 3000,
                 profession: 'programmer',
-                department: 'department 1'
+                department: 'department 1',
+                id: 0
             },
             {
                 age: 36,
@@ -38,7 +38,8 @@ export class EmployeeService {
                 surname: 'Samoylov',
                 salary: 4000,
                 profession: 'programmer',
-                department: 'department 2'
+                department: 'department 2',
+                id: 1
             },
             {
                 age: 26,
@@ -46,7 +47,8 @@ export class EmployeeService {
                 surname: 'Petrov',
                 salary: 3000,
                 profession: 'programmer',
-                department: 'department 2'
+                department: 'department 2',
+                id: 2
             },
             {
                 age: 27,
@@ -54,7 +56,8 @@ export class EmployeeService {
                 surname: 'Batuev',
                 salary: 1700,
                 profession: 'manager',
-                department: 'department 3'
+                department: 'department 3',
+                id: 3
             },
             {
                 age: 37,
@@ -62,7 +65,8 @@ export class EmployeeService {
                 surname: 'Nikolsk',
                 salary: 7000,
                 profession: 'programmer',
-                department: 'department 1'
+                department: 'department 1',
+                id: 4
             }
         ];
 

@@ -15,7 +15,7 @@
       *ngIf="eventForm.get('eventMembers')?.touched && eventForm.get('eventMembers')?.errors?['required'] : null">
       Обязательное поле*
     </div>
-    <app-select [formControlName]="'eventMembers'"></app-select>
+    <app-select id="eventStart" [formControlName]="'eventMembers'" [multiple]="true"></app-select>
   </div>
   <div class="form__group">
     <label for="eventDuration">Продолжительность:</label>
