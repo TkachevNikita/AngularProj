@@ -5,7 +5,7 @@ import { MenuComponent } from '../cabinet/components/menu/menu.component';
 import { EmployeeComponent } from '../cabinet/components/employee/employee.component';
 import { EmployeesPageComponent } from './pages/employees/employees.page';
 import { CommonModule } from '@angular/common';
-import { CalendarPageComponent } from './pages/calendar/calendar.page';
+import { SelfCalendarPageComponent } from './pages/calendar/self-calendar.page';
 import { RoomsPageComponent } from './pages/rooms/rooms.page';
 import { MainPageComponent } from './pages/main/main.page';
 import { NotFoundPage } from './pages/not-found/not-found.page';
@@ -16,6 +16,7 @@ import { RoomsCalendarComponent } from './pages/rooms/components/rooms-calendar/
 import { EmployeeFormComponent } from './components/forms/employee-form/employee-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeModalComponent } from './components/modals/employee-modal/employee-modal.component';
+import { LocalStorageManagerService } from '../services/local-storage-manager.service';
 
 
 @NgModule({
@@ -24,8 +25,7 @@ import { EmployeeModalComponent } from './components/modals/employee-modal/emplo
         MenuComponent,
         EmployeeComponent,
         EmployeesPageComponent,
-        CalendarPageComponent,
-        CalendarPageComponent,
+        SelfCalendarPageComponent,
         RoomsPageComponent,
         MainPageComponent,
         NotFoundPage,
@@ -44,6 +44,9 @@ import { EmployeeModalComponent } from './components/modals/employee-modal/emplo
         FormsModule,
         ReactiveFormsModule
     ],
+    providers: [
+        LocalStorageManagerService
+    ]
 })
 export class CabinetLayoutModule {
 

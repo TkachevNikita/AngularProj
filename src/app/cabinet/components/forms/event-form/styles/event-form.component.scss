@@ -48,3 +48,12 @@ app-select.ng-invalid {
   color: red;
   font-weight: 600;
 }
+
+.form__group:last-child {
+  flex-direction: row;
+}
+
+.form__group-time {
+  display: flex;
+  flex-direction: column;
+}

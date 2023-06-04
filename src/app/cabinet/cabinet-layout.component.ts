@@ -15,7 +15,7 @@ export class CabinetLayoutComponent {
                 {
                     next: (value: any) => {
                         switch (value.url) {
-                            case '/':
+                            case '/cabinet':
                                 this.title$.next('Главная страница');
                                 break;
                             case '/cabinet/calendar':
@@ -26,7 +26,9 @@ export class CabinetLayoutComponent {
                                 break;
                             case '/cabinet/rooms':
                                 this.title$.next('Переговорные комнаты');
-                                console.log(value);
+                                break;
+                            case '/cabinet/selfcalendar':
+                                this.title$.next('Моё расписание');
                                 break;
                             default:
                                 this.title$.next('Страница не найдена');

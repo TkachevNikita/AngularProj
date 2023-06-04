@@ -4,23 +4,33 @@ import { CalendarEvent } from 'angular-calendar';
 import { EventsKey } from '../enums/events-key.enum';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { UserService } from './user.service';
 
 @Injectable()
 export class LocalStorageManagerService {
 
     private static readonly _key = 'LOCAL_STOR_SERVICE';
 
-    constructor(private _localStorageService: LocalStorageService) { }
+    constructor(private _localStorageService: LocalStorageService, private _userService: UserService) { }
 
+    public setSelfEvents(key: EventsKey): void {
+        const events = this.getEventsByKey(EventsKey.allMeetingRooms);
+        const newEvents: CalendarEvent[] = events
+            .filter(
+                event => event.members?.some(member  => member.id === this._userService.user.id)
+            );
+        this.setEventsByKey(key, newEvents);
+    }
     /**
      * Объединяем все ивенты
      */
     public setAllEvents(key: EventsKey): void {
         const eventKeys: string[] = Object.keys(localStorage);
         const data: CalendarEvent[] = [];
+        const selfKey: string = LocalStorageManagerService._key + '_' + EventsKey.selfMeetingRooms.toString();
         const storageKey: string = LocalStorageManagerService._key + '_' + key.toString();
         for (const eventKey of eventKeys) {
-            if (eventKey !== storageKey) {
+            if (eventKey !== storageKey && eventKey !== selfKey && eventKey.includes(LocalStorageManagerService._key)) {
                 const values = this._localStorageService.getItem(eventKey);
                 data.push(...values);
             }
@@ -45,6 +55,7 @@ export class LocalStorageManagerService {
         const storageData: string = JSON.stringify(data);
         this._localStorageService.setItem(storageKey, storageData);
         this.setAllEvents(EventsKey.allMeetingRooms);
+
     }
 
 }

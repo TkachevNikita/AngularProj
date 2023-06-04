@@ -30,7 +30,8 @@ export class EmployeeService {
                 salary: 3000,
                 profession: 'programmer',
                 department: 'department 1',
-                id: 0
+                id: 0,
+                eventLimit: 5
             },
             {
                 age: 36,
@@ -39,7 +40,8 @@ export class EmployeeService {
                 salary: 4000,
                 profession: 'programmer',
                 department: 'department 2',
-                id: 1
+                id: 1,
+                eventLimit: 5
             },
             {
                 age: 26,
@@ -48,7 +50,8 @@ export class EmployeeService {
                 salary: 3000,
                 profession: 'programmer',
                 department: 'department 2',
-                id: 2
+                id: 2,
+                eventLimit: 5
             },
             {
                 age: 27,
@@ -57,7 +60,8 @@ export class EmployeeService {
                 salary: 1700,
                 profession: 'manager',
                 department: 'department 3',
-                id: 3
+                id: 3,
+                eventLimit: 5
             },
             {
                 age: 37,
@@ -66,7 +70,8 @@ export class EmployeeService {
                 salary: 7000,
                 profession: 'programmer',
                 department: 'department 1',
-                id: 4
+                id: 4,
+                eventLimit: 5
             }
         ];
 

@@ -1,8 +1,9 @@
-<!-- навигация -->
-<!-- <ng-container *ngIf="calendarViewModel">
-
-</ng-container> -->
-<button class="btn-event" (click)="openModal()" [disabled]="!this.calendarViewModel.dayIsClicked" >Создать</button>
+<div class="header" *ngIf="isRoom">
+  <div class="limit" *ngIf="dayIsClicked">
+    Возможно запланировать встреч: {{ eventsRemainingCount }}
+  </div>
+  <button class="btn-event" (click)="openModal()" [disabled]="!this.calendarViewModel.dayIsClicked" >Создать</button>
+</div>
 <div class="row text-center">
   <div class="col-md-4">
     <div class="btn-group">
@@ -63,7 +64,6 @@
   </div>
 </div>
 
-<!-- Вынести в отдельный компонет! -->
 <ng-container *ngIf="calendarViewModel.events$ | async as e">
   <div [ngSwitch]="this.calendarViewModel.view">
     <mwl-calendar-month-view
@@ -95,13 +95,5 @@
 <app-form-dialog *ngIf="this.calendarViewModel.modalIsOpen" (closeModalEvent)="closeModal()">
   <app-form (submitEvent)="onSubmit($event)"></app-form>
 </app-form-dialog>
-
-<app-event-dialog
-  [members]="this.calendarViewModel.currentMembers"
-  [title]="this.calendarViewModel.currentTitle"
-  [isEventDialogOpen]="this.calendarViewModel.eventDialogIsOpen"
-  (isEventDialogClose)="closeEventDialog()"
->
-</app-event-dialog>
 
 

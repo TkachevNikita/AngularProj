@@ -13,6 +13,7 @@ import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
 export class MenuComponent {
     public currentUser!: IEmployee;
     public onFocus: boolean = false;
+    public isAdmin: boolean | undefined = this._user.user.isAdmin;
 
     constructor(private _user: UserService, private _route: Router) {
         this.currentUser = _user.user;

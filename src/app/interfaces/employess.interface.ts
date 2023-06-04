@@ -9,4 +9,5 @@ export interface IEmployee {
     id: number;
     isAuth?: boolean;
     isAdmin?: boolean;
+    eventLimit: number,
 }

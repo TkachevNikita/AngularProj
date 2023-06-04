@@ -5,5 +5,6 @@ export enum EventsKey {
     meetingRoom4,
     meetingRoom5,
     meetingRoom6,
-    allMeetingRooms = 'events'
+    allMeetingRooms = 'events',
+    selfMeetingRooms = 'self'
 }

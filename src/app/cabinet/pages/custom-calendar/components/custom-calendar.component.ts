@@ -8,7 +8,7 @@ import {
     AfterViewInit,
     Input,
 } from '@angular/core';
-import { isSameDay, isSameMonth } from 'date-fns';
+import { addHours, isSameDay, isSameMonth, setHours } from 'date-fns';
 import { BehaviorSubject, Observable, Subject, filter, take } from 'rxjs';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
@@ -32,6 +32,10 @@ import { UserService } from 'src/app/services/user.service';
 export class DemoComponent implements OnInit {
 
     @Input() public calendarViewModel!: CalendarViewModel;
+    public eventsRemainingCount!: number;
+    public dayIsClicked: boolean = false;
+    public ownerCount!: number;
+    public isRoom: boolean = true;
 
     constructor(
         private _modal: NgbModal,
@@ -43,6 +47,20 @@ export class DemoComponent implements OnInit {
         private _userService: UserService
     ) {
         this.calendarViewModel = new CalendarViewModel([]);
+        this._router.events.pipe(filter(event => event instanceof NavigationEnd))
+            .subscribe(
+                {
+                    next: (value: any) => {
+                        switch (value.url) {
+                            case '/cabinet/calendar':
+                                this.isRoom = false;
+                                break;
+                            case '/cabinet/selfcalendar':
+                                this.isRoom = false;
+                                break;
+                        }
+                    }
+                });
     }
 
     public onCreateModal(): void {
@@ -63,11 +81,20 @@ export class DemoComponent implements OnInit {
 
     public ngOnInit(): void {
         const data = this._storageManager.getEventsByKey(this.calendarViewModel.id);
-        console.log(data);
         if (data) {
             const currentEvents = this.refactorEvents(data);
             this.calendarViewModel.events$.next(currentEvents);
         }
+    }
+
+    public isEventConflict(eventStart: number, eventEnd: number, events: any): boolean {
+        for (const event of events) {
+            if (eventStart < event.end.getHours() && eventEnd > event.start.getHours()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public refactorEvents(data: CalendarEvent[]): CalendarEvent[] {
@@ -75,12 +102,18 @@ export class DemoComponent implements OnInit {
             element.start = new Date(element.start);
             element.end = new Date(element.end as unknown as string);
         });
-        const events: CalendarEvent[] = data
-            .filter(
-                event => event.members?.some(member => member.id === this._userService.user.id)
-            );
 
-        return events;
+        return data;
+    }
+
+    public createEventsCount(events: CalendarEvent[]): number {
+        return events.reduce((acc, event) => {
+            if (event.owner?.id === this._userService.user.id) {
+                return acc + 1;
+            }
+
+            return acc;
+        }, 0);
     }
 
     public onSubmit(event: CalendarEvent): void {
@@ -90,9 +123,10 @@ export class DemoComponent implements OnInit {
     }
 
     /**
-     * выбор дня
+     * Выбор дня
      */
     public dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+        this.dayIsClicked = true;
         if (isSameMonth(date, this.calendarViewModel.viewDate)) {
             if (
                 (isSameDay(this.calendarViewModel.viewDate, date) && this.calendarViewModel.activeDayIsOpen === true) ||
@@ -105,28 +139,47 @@ export class DemoComponent implements OnInit {
             this.calendarViewModel.viewDate = date;
             this.calendarViewModel.currentDay = new Date(date.getFullYear(), date.getMonth(), date.getDate());
         }
-        this.calendarViewModel.dayIsClicked = true;
+
+        this.ownerCount = this.createEventsCount(events);
+
+        if (this.ownerCount < this._userService.user.eventLimit) {
+            this.calendarViewModel.dayIsClicked = true;
+        } else {
+            this.calendarViewModel.dayIsClicked = false;
+        }
+        this.eventsRemainingCount = this._userService.user.eventLimit - this.ownerCount;
     }
 
     public addEvent(event: any): void {
-        this.calendarViewModel.events$.next([
-            ...this.calendarViewModel.events$.getValue(),
-            {
-                title: event.eventTitle,
-                start: new Date(event.start),
-                end: new Date(event.start),
-                color: this.calendarViewModel.color,
-                draggable: true,
-                resizable: {
-                    beforeStart: true,
-                    afterEnd: true,
-                },
-                members: event.eventMembers,
-                owner: this._userService.user
-            },
-        ]);
-        this._storageManager.setEventsByKey(this.calendarViewModel.id, this.calendarViewModel.events$.getValue());
+        const events = this.calendarViewModel.events$.getValue().filter(
+            needEvent => needEvent.start.getDay() === event.start.getDay()
+        );
 
+        if (!this.isEventConflict(Number(event.eventStart), Number(event.eventEnd), events)) {
+            this.calendarViewModel.events$.next([
+                ...this.calendarViewModel.events$.getValue(),
+                {
+                    title: event.eventTitle,
+                    start: addHours(event.start, Number(event.eventStart)),
+                    end: addHours(event.start, Number(event.eventEnd) + 1),
+                    color: this.calendarViewModel.color,
+                    draggable: true,
+                    resizable: {
+                        beforeStart: true,
+                        afterEnd: true,
+                    },
+                    members: event.eventMembers,
+                    owner: this._userService.user
+                },
+            ]);
+
+            this.eventsRemainingCount = this._userService.user.eventLimit - events.length;
+            if (this.eventsRemainingCount === 0) {
+                this.calendarViewModel.dayIsClicked = false;
+            }
+            this._storageManager.setEventsByKey(this.calendarViewModel.id, this.calendarViewModel.events$.getValue());
+        }
+        console.log('123');
     }
 
     public eventClicked(event: any): void {

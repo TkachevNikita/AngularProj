@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Departments } from 'src/app/enums/department.enums';
-import { Professions } from 'src/app/enums/profession.enums';
-import { IEmployee } from 'src/app/interfaces/employess.interface';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { UserService } from 'src/app/services/user.service';
 import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
 
 @Component({
@@ -17,8 +15,9 @@ export class EmployeesPageComponent {
 
     public employees$!: Observable<EmployeeModel[]>;
     public employeesData!: EmployeeModel[];
+    public isAdmin: boolean | undefined = this._user.user.isAdmin;
 
-    constructor(private _employeeService: EmployeeService) {
+    constructor(private _employeeService: EmployeeService, private _user: UserService) {
         this.employees$ = _employeeService.getEmployees();
         this.employees$.subscribe((data) => this.employeesData = data);
     }

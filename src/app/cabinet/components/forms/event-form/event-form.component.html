@@ -18,13 +18,28 @@
     <app-select id="eventStart" [formControlName]="'eventMembers'" [multiple]="true"></app-select>
   </div>
   <div class="form__group">
-    <label for="eventDuration">Продолжительность:</label>
-    <div
-      class="error-message"
-      *ngIf="eventForm.get('eventDuration')?.touched && eventForm.get('eventDuration')?.errors?['required'] : null">
-      Обязательное поле*
+    <div class="form__group-time">
+      <label for="eventStart">Время начала:</label>
+      <div
+        class="error-message"
+        *ngIf="eventForm.get('eventDuration')?.touched && eventForm.get('eventDuration')?.errors?['required'] : null">
+        Обязательное поле*
+      </div>
+      <select [formControlName]="'eventStart'" id="eventStart">
+        <option *ngFor="let hour of startHours" [value]="hour">{{hour}}:00</option>
+      </select>
     </div>
-    <input id="eventDuration" type="number" [formControlName]="'eventDuration'">
-  </div>
+    <div class="form__group-time">
+    <label for="eventEnd">Время окончания:</label>
+      <div
+        class="error-message"
+        *ngIf="eventForm.get('eventDuration')?.touched && eventForm.get('eventDuration')?.errors?['required'] : null">
+        Обязательное поле*
+      </div>
+      <select [formControlName]="'eventEnd'" id="eventEnd">
+        <option *ngFor="let hour of endHours" [value]="hour">{{hour}}:00</option>
+      </select>
+      </div>
+    </div>
   <button (click)="onSubmit()" [disabled]="eventForm.invalid">Создать</button>
 </form>

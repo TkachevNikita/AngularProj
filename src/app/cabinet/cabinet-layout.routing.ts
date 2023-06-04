@@ -7,6 +7,7 @@ import { MainPageComponent } from './pages/main/main.page';
 import { NotFoundPage } from './pages/not-found/not-found.page';
 import { DemoComponent } from './pages/custom-calendar/components/custom-calendar.component';
 import { RoomsCalendarComponent } from './pages/rooms/components/rooms-calendar/rooms-calendar.component';
+import { SelfCalendarPageComponent } from './pages/calendar/self-calendar.page';
 
 const routes: Routes = [
     {
@@ -17,6 +18,10 @@ const routes: Routes = [
                 path: '',
                 component: MainPageComponent,
                 pathMatch: 'full'
+            },
+            {
+                path: 'selfcalendar',
+                component: SelfCalendarPageComponent,
             },
             {
                 path: 'employees',

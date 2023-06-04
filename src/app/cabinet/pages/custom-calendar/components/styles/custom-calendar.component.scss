@@ -64,3 +64,9 @@ pre {
   background-color: #e1e1e1;
   cursor: default;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

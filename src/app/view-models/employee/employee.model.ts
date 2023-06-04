@@ -11,6 +11,7 @@ export class EmployeeModel {
     public readonly profession: Professions | undefined;
     public readonly department: Departments | undefined;
     public readonly id: number;
+    public readonly eventLimit: number;
 
     constructor(data: IEmployee) {
         this.age = data.age;
@@ -20,6 +21,7 @@ export class EmployeeModel {
         this.salary = data.salary;
         this.department = this.getDepartment(data.department);
         this.id = data.id;
+        this.eventLimit = data.eventLimit;
     }
 
     /**
