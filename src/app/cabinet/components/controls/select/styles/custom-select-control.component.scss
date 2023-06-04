@@ -3,7 +3,10 @@
   height: 25px;
 }
 
-.select,
+.select {
+  border-bottom: 1px solid #2B4A52;
+}
+
 .select__dropdown {
   outline: 1px solid black;
 }
@@ -16,6 +19,7 @@
 .select__dropdown {
   display: none;
   position: absolute;
+  padding-bottom: 10px;
   width: 100%;
 }
 
@@ -26,7 +30,6 @@
 .select__option,
 .select__current {
   cursor: pointer;
-  padding: 0 15px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

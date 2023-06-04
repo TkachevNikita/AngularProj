@@ -26,6 +26,7 @@ export class CabinetLayoutComponent {
                                 break;
                             case '/cabinet/rooms':
                                 this.title$.next('Переговорные комнаты');
+                                console.log(value);
                                 break;
                             default:
                                 this.title$.next('Страница не найдена');

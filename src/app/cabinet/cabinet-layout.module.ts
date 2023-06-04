@@ -13,6 +13,9 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { DemoModule } from './pages/custom-calendar/custom-calendar.module';
 import { RoomsCalendarComponent } from './pages/rooms/components/rooms-calendar/rooms-calendar.component';
+import { EmployeeFormComponent } from './components/forms/employee-form/employee-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmployeeModalComponent } from './components/modals/employee-modal/employee-modal.component';
 
 
 @NgModule({
@@ -27,6 +30,8 @@ import { RoomsCalendarComponent } from './pages/rooms/components/rooms-calendar/
         MainPageComponent,
         NotFoundPage,
         RoomsCalendarComponent,
+        EmployeeFormComponent,
+        EmployeeModalComponent
     ],
     imports: [
         routing,
@@ -36,6 +41,8 @@ import { RoomsCalendarComponent } from './pages/rooms/components/rooms-calendar/
             useFactory: adapterFactory,
         }),
         DemoModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
 })
 export class CabinetLayoutModule {

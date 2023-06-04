@@ -20,6 +20,16 @@ p {
 
 .burger__container {
   padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.exit {
+  cursor: pointer;
+}
+
+.exit svg {
+  height: 20px;
 }
 
 .burger {
@@ -104,3 +114,21 @@ p {
   width: 100%;
 }
 
+// .leave-open {
+//   display: flex;
+//   align-items: center;
+// }
+
+// .route-leave {
+//   position: absolute;
+//   background-color: #C05640;
+//   width: 33%;
+//   height: 100%;
+//   right: -33%;
+//   display: none;
+// }
+
+// .route-leave svg {
+//   width: 30px;
+//   height: 30px;
+// }

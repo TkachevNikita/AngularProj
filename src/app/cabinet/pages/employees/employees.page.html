@@ -1,15 +1,22 @@
 <ng-container *ngIf="employees$ | async as employees">
   <div class="container">
     <div class="sort">
-      <span>Сортировать по:</span>
+      <div class="sort__header">
+        <span>Сортировать по:</span>
+        <button class="new-emp">
+          Добавить
+        </button>
+      </div>
       <div class="buttons__container">
-        <button (click)="sortByName()">По имени</button>
-        <button (click)="sortByDepartment()">По отделу</button>
-        <button (click)="sortByProfession()">По должности</button>
+        <button class="sort-btn" (click)="sortByName()">По имени</button>
+        <button class="sort-btn" (click)="sortByDepartment()">По отделу</button>
+        <button class="sort-btn" (click)="sortByProfession()">По должности</button>
       </div>
     </div>
-    <app-employee *ngFor="let emp of employees" [employee]="emp">
+    <div class="employee__container">
+      <app-employee *ngFor="let emp of employees" [employee]="emp">
 
-    </app-employee>
+      </app-employee>
+    </div>
   </div>
 </ng-container>

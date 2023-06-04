@@ -7,7 +7,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DemoComponent } from './components/custom-calendar.component';
 import { FormDialogComponent } from '../../components/dialogs/form-dialog/form-dialog.component';
-import { FormComponent } from '../../components/form/form.component';
+import { EventFormComponent } from '../../components/forms/event-form/event-form.component';
 import { SelectComponent } from '../../components/controls/select/custom-select-control.component';
 import { EventDialogComponent } from '../../components/dialogs/event-dialog/event-dialog.component';
 import { CalendarHeaderComponent } from '../../components/calendar/calendar-header/calendar-header.component';
@@ -31,7 +31,7 @@ import { AppSelectModule } from '../../components/controls/select/custom-select-
     declarations: [
         DemoComponent,
         FormDialogComponent,
-        FormComponent,
+        EventFormComponent,
         EventDialogComponent,
         CalendarHeaderComponent,
     ],

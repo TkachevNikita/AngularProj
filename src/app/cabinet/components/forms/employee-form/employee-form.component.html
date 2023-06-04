@@ -1,0 +1,27 @@
+<form class="form" >
+  <!-- <div class="form__group">
+    <label for="">Имя:</label>
+    <input type="text">
+  </div>
+  <div class="form__group">
+    <label for="">Фамилия:</label>
+    <input type="text">
+  </div>
+  <div class="form__group">
+    <label for="">Должность:</label>
+    <input type="text">
+  </div>
+  <div class="form__group">
+    <label for="">Отдел:</label>
+    <input type="text">
+  </div>
+  <div class="form__group">
+    <label for="">Зарплата:</label>
+    <input type="text">
+  </div> -->
+  <div class="form__group" [formGroup]="employeeForm">
+    <label for="limit">Лимит на создание встреч:</label>
+    <input id="limit" type="number" [formControlName]="'limit'">
+  </div>
+  <button (click)="onSubmit()" type="submit">Сохранить</button>
+</form>

@@ -1,4 +1,31 @@
 .employee {
   border: 1px solid #537173;
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.employee__img {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 15px;
+  border-radius: 50%;
+}
+
+p {
+  margin: 0;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.employee__name {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.edit {
+  align-self: flex-end;
+  background-color: transparent;
+  cursor:pointer;
 }

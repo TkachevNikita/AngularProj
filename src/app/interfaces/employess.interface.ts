@@ -8,4 +8,5 @@ export interface IEmployee {
     role?: string;
     id: number;
     isAuth?: boolean;
+    isAdmin?: boolean;
 }

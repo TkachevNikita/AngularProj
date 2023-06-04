@@ -1,0 +1,21 @@
+<form [formGroup]="loginForm">
+  <div class="form__group">
+    <label for="employee">Сотрудник:</label>
+    <app-select id="employee" formControlName="loginEmployee" [multiple]="false"></app-select>
+    <div
+      class="error-message"
+      *ngIf="loginForm.get('loginEmployee')?.touched && loginForm.get('loginEmployee')?.errors?['required'] : null">
+      Обязательное поле*
+    </div>
+  </div>
+  <div class="form__group">
+    <label for="password">Пароль:</label>
+    <input id="password" type="password" formControlName="loginPassword">
+    <div
+      class="error-message"
+      *ngIf="loginForm.get('loginPassword')?.touched && loginForm.get('loginPassword')?.errors?['required'] : null">
+      Обязательное поле*
+    </div>
+  </div>
+  <button class="submit" type="submit" (click)="onSubmit()" [disabled]="loginForm.invalid">Войти</button>
+</form>

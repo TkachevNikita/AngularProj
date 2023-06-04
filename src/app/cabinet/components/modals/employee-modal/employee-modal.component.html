@@ -1,0 +1,10 @@
+<div class="modal">
+  <div class="modal-header">
+    <h3>{{ title }}</h3>
+    <button type="button" class="close" (click)="cancel()">&times;</button>
+  </div>
+  <div class="modal-body">
+    <app-employee-form [currentEmployee]="currentEmployee" (destroyModal)="cancel()"></app-employee-form>
+  </div>
+
+</div>

@@ -122,6 +122,7 @@ export class DemoComponent implements OnInit {
                     afterEnd: true,
                 },
                 members: event.eventMembers,
+                owner: this._userService.user
             },
         ]);
         this._storageManager.setEventsByKey(this.calendarViewModel.id, this.calendarViewModel.events$.getValue());

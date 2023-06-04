@@ -3,11 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CalendarEvent } from 'angular-calendar';
 
 @Component({
-    templateUrl: './form.component.html',
+    templateUrl: './event-form.component.html',
     selector: 'app-form',
-    styleUrls: ['./styles/form.component.scss'],
+    styleUrls: ['./styles/event-form.component.scss'],
 })
-export class FormComponent {
+export class EventFormComponent {
     public eventForm: FormGroup;
     @Output() public submitEvent = new EventEmitter<CalendarEvent>();
 

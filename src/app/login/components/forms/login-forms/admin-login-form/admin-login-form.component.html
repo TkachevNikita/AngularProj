@@ -1,0 +1,12 @@
+<form [formGroup]="loginForm">
+  <div class="form__group">
+    <label for="password">Пароль:</label>
+    <input id="password" type="password" formControlName="loginPassword">
+    <div
+      class="error-message"
+      *ngIf="loginForm.get('loginPassword')?.touched && loginForm.get('loginPassword')?.errors?['required'] : null">
+      Обязательное поле*
+    </div>
+  </div>
+  <button class="submit" type="submit" (click)="onSubmit()" [disabled]="loginForm.invalid">Войти</button>
+</form>
