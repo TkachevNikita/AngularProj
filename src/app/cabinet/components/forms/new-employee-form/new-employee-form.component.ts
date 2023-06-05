@@ -31,13 +31,14 @@ export class NewEmployeeFormComponent {
     public onSubmit(): void {
         const newEmployee = this.newEmployeeForm.value;
         newEmployee.salary = Number(newEmployee.salary);
-        newEmployee.id = 6; //
         newEmployee.eventLimit = 5;
         console.log(this.newEmployeeForm.value);
 
         if (!this._storage.getItem(EmployeesKey.employees)) {
+            newEmployee.id = 5;
             this._storage.setItem(EmployeesKey.employees, JSON.stringify([newEmployee]));
         } else {
+            newEmployee.id = this._storage.getItem(EmployeesKey.employees).length;
             const mergedEmployees = [...this._storage.getItem(EmployeesKey.employees), ...[newEmployee]];
             this._storage.setItem(EmployeesKey.employees, JSON.stringify(mergedEmployees));
         }

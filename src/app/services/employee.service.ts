@@ -36,7 +36,7 @@ export class EmployeeService {
                 name: 'Oleg',
                 surname: 'Chikev',
                 salary: 3000,
-                profession: 'programmer',
+                profession: 'Программист',
                 department: 'department 1',
                 id: 0,
                 eventLimit: 5

@@ -29,13 +29,13 @@ export class EmployeeModel {
      */
     public getProfession(key: string): Professions | undefined {
         switch (key) {
-            case 'programmer':
+            case 'programmer' || 'Программист':
                 return Professions.programmer;
-            case 'manager':
+            case 'manager' || 'Менеджер':
                 return Professions.manager;
-            case 'analyst':
+            case 'analyst' || 'Аналитик':
                 return Professions.analyst;
-            case 'qaengineer':
+            case 'qaengineer' || 'Тестировщик':
                 return Professions.qaengineer;
             default:
                 return Professions.analyst;
@@ -44,11 +44,11 @@ export class EmployeeModel {
 
     public getDepartment(key: string): Departments | undefined {
         switch (key) {
-            case 'department 1':
+            case 'department 1' || 'Отдел 1':
                 return Departments.first;
-            case 'department 2':
+            case 'department 2' || 'Отдел 2':
                 return Departments.second;
-            case 'department 3':
+            case 'department 3' || 'Отдел 3':
                 return Departments.third;
             default:
                 return Departments.first;
