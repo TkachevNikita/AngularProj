@@ -18,7 +18,6 @@ export class RoomsCalendarComponent implements OnDestroy {
     public rooms$!: Observable<RoomModel[]>;
     public roomsData!: RoomModel[];
     private _paramsSubscription$: Subject<void> = new Subject<void>();
-    private _roomsSubscription!: Subscription | undefined;
 
     private _colors: Record<string, EventColor> = {
         red: {
@@ -50,10 +49,18 @@ export class RoomsCalendarComponent implements OnDestroy {
       private _route: ActivatedRoute
     ) {
         this.rooms$ = _roomSerivce.getRooms();
-        this.rooms$.subscribe(data => this.roomsData = data);
+        this.rooms$
+            .pipe(
+                takeUntil(this._paramsSubscription$)
+            )
+            .subscribe(data => this.roomsData = data);
         this.init();
     }
 
+    /**
+     * Устанавливает цвет ивента
+     * @param id - ID переговорки
+     */
     public setEventColor(id: EventsKey): void {
         switch(id) {
             case EventsKey.meetingRoom1:
@@ -74,6 +81,9 @@ export class RoomsCalendarComponent implements OnDestroy {
         }
     }
 
+    /**
+     * Инициализация переговорки
+     */
     public init(): void {
 
         this._route.params
@@ -83,8 +93,8 @@ export class RoomsCalendarComponent implements OnDestroy {
             .subscribe((params: Params) => {
                 this.model = new CalendarViewModel([]);
                 this.model.isMeetingRoom = true;
-                this.setEventColor(this.model.id);
                 this.model.id = params['id'];
+                this.setEventColor(this.model.id);
             });
     }
 

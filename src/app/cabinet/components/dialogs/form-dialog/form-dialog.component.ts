@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     templateUrl: 'form-dialog.component.html',
@@ -7,10 +7,10 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 })
 
 export class FormDialogComponent {
-  @Input() isOpenModal = false;
-  @Output() closeModalEvent = new EventEmitter<boolean>();
+    @Input() public isOpenModal = false;
+    @Output() public closeModalEvent = new EventEmitter<boolean>();
 
-  closeModal() {
-    this.closeModalEvent.emit(false);
-  }
+    public closeModal(): void {
+        this.closeModalEvent.emit(false);
+    }
 }

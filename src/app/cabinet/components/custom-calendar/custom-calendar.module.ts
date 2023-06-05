@@ -5,12 +5,10 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { DemoComponent } from './components/custom-calendar.component';
+import { CustomCalendarComponent } from './components/custom-calendar.component';
 import { FormDialogComponent } from '../../components/dialogs/form-dialog/form-dialog.component';
 import { EventFormComponent } from '../../components/forms/event-form/event-form.component';
 import { SelectComponent } from '../../components/controls/select/custom-select-control.component';
-import { EventDialogComponent } from '../../components/dialogs/event-dialog/event-dialog.component';
-import { CalendarHeaderComponent } from '../../components/calendar/calendar-header/calendar-header.component';
 import { ModalServiceModule } from 'src/app/libs/modal-service/modal.module';
 import { AppSelectModule } from '../../components/controls/select/custom-select-control.module';
 
@@ -29,12 +27,10 @@ import { AppSelectModule } from '../../components/controls/select/custom-select-
         AppSelectModule
     ],
     declarations: [
-        DemoComponent,
+        CustomCalendarComponent,
         FormDialogComponent,
         EventFormComponent,
-        EventDialogComponent,
-        CalendarHeaderComponent,
     ],
-    exports: [DemoComponent],
+    exports: [CustomCalendarComponent],
 })
 export class DemoModule { }

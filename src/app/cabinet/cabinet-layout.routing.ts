@@ -5,7 +5,7 @@ import { EmployeesPageComponent } from '../cabinet/pages/employees/employees.pag
 import { RoomsPageComponent } from '../cabinet/pages/rooms/rooms.page';
 import { MainPageComponent } from './pages/main/main.page';
 import { NotFoundPage } from './pages/not-found/not-found.page';
-import { DemoComponent } from './pages/custom-calendar/components/custom-calendar.component';
+import { CustomCalendarComponent } from './components/custom-calendar/components/custom-calendar.component';
 import { RoomsCalendarComponent } from './pages/rooms/components/rooms-calendar/rooms-calendar.component';
 import { SelfCalendarPageComponent } from './pages/calendar/self-calendar.page';
 
@@ -16,7 +16,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                component: DemoComponent,
+                component: CustomCalendarComponent,
                 pathMatch: 'full'
             },
             {
@@ -29,7 +29,7 @@ const routes: Routes = [
             },
             {
                 path: 'calendar',
-                component: DemoComponent,
+                component: CustomCalendarComponent,
             },
             {
                 path: 'rooms',

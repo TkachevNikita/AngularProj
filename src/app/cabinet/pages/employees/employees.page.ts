@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, of, take, tap } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subject, of, take, takeUntil, tap } from 'rxjs';
 import { ModalService } from 'src/app/libs/modal-service/modal.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { UserService } from 'src/app/services/user.service';
@@ -13,11 +13,13 @@ import { EmployeesKey } from 'src/app/enums/employees.enums';
     templateUrl: './employees.page.html',
     styleUrls: ['./styles/employees.page.scss']
 })
-export class EmployeesPageComponent {
+export class EmployeesPageComponent implements OnDestroy {
 
     public employees$: BehaviorSubject<EmployeeModel[]> = new BehaviorSubject<EmployeeModel[]>([]);
     public newEmployees$!: Observable<EmployeeModel[]>;
+    public employeesData!: EmployeeModel[];
     public isAdmin: boolean | undefined = this._user.user.isAdmin;
+    private _subscription$: Subject<void> = new Subject<void>();
 
     constructor(
         private _employeeService: EmployeeService,
@@ -25,8 +27,10 @@ export class EmployeesPageComponent {
         private _modalService: ModalService,
         private _storage: LocalStorageService
     ) {
+        this.employees$.subscribe((data) => this.employeesData = data);
         this._employeeService.getEmployees()
             .pipe(
+                takeUntil(this._subscription$),
                 tap((value: EmployeeModel[]) => {
                     this._storage.setItem(EmployeesKey.employees, JSON.stringify(value));
                 })
@@ -38,6 +42,9 @@ export class EmployeesPageComponent {
             });
 
         this._employeeService.employee$
+            .pipe(
+                takeUntil(this._subscription$)
+            )
             .subscribe({
                 next: () => {
                     this.employees$.next(this._storage.getItem(EmployeesKey.employees));
@@ -52,57 +59,53 @@ export class EmployeesPageComponent {
         modalRef.onResult()
             .pipe(
                 take(1)
-            )
-            .subscribe({
-                next: (value) => console.log(value)
-            });
-
-
+            );
     }
 
-    public sortByName(employeesData: EmployeeModel[]): void {
+    public sortByName(): void {
+      this.employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
+          if (a.name > b.name) {
+              return 1;
+          }
+          else if (a.name < b.name) {
+              return -1;
+          }
 
-        employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
-            if (a.name > b.name) {
-                return 1;
-            }
-            else if (a.name < b.name) {
-                return -1;
-            }
+          return 0;
+      });
+      this.employees$ = of(this.employeesData);
+  }
 
-            return 0;
-        });
-        this.employees$.next(employeesData);
+  public sortByDepartment(): void {
+      this.employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
+          if (a.department! > b.department!) {
+              return 1;
+          }
+          else if (a.department! < b.department!) {
+              return -1;
+          }
+
+          return 0;
+      });
+      this.employees$ = of(this.employeesData);
+  }
+
+  public sortByProfession(): void {
+      this.employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
+          if (a.profession! > b.profession!) {
+              return 1;
+          }
+          else if (a.profession! < b.profession!) {
+              return -1;
+          }
+
+          return 0;
+      });
+      this.employees$ = of(this.employeesData);
+  }
+
+
+    public ngOnDestroy(): void {
+        this._subscription$.unsubscribe();
     }
-
-    public sortByDepartment(employeesData: EmployeeModel[]): void {
-
-        employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
-            if (a.department! > b.department!) {
-                return 1;
-            }
-            else if (a.department! < b.department!) {
-                return -1;
-            }
-
-            return 0;
-        });
-
-        this.employees$.next(employeesData);
-    }
-
-    public sortByProfession(employeesData: EmployeeModel[]): void {
-        employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
-            if (a.profession! > b.profession!) {
-                return 1;
-            }
-            else if (a.profession! < b.profession!) {
-                return -1;
-            }
-
-            return 0;
-        });
-        this.employees$.next(employeesData);
-    }
-
 }

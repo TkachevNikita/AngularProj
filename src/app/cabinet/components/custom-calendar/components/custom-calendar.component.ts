@@ -26,7 +26,7 @@ import { ErrorModalComponent } from 'src/app/cabinet/components/modals/error-mod
     styleUrls: ['styles/custom-calendar.component.scss'],
     templateUrl: 'custom-calendar.component.html',
 })
-export class DemoComponent implements OnInit {
+export class CustomCalendarComponent implements OnInit {
 
     @Input() public calendarViewModel!: CalendarViewModel;
     public eventsRemainingCount!: number;
@@ -75,6 +75,13 @@ export class DemoComponent implements OnInit {
         }
     }
 
+    /**
+     * Проверяет наличие конфликта в расписании
+     * @param eventStart - Начало текущего ивента
+     * @param eventEnd - Конец текущего ивента
+     * @param events - Ивенты текущего дня
+     * @returns boolean - Конфликт в расписании
+     */
     public isEventConflict(eventStart: number, eventEnd: number, events: any): boolean {
         for (const event of events) {
             if (eventStart < event.end.getHours() && eventEnd > event.start.getHours()) {
@@ -85,6 +92,11 @@ export class DemoComponent implements OnInit {
         return false;
     }
 
+    /**
+     * Преобразует даты из string в Date
+     * @param data - Ивенты текущего календаря
+     * @returns CalendarEvent[] - Ивенты с форматированными датами
+     */
     public refactorEvents(data: CalendarEvent[]): CalendarEvent[] {
         data.forEach((element: CalendarEvent) => {
             element.start = new Date(element.start);
@@ -94,6 +106,11 @@ export class DemoComponent implements OnInit {
         return data;
     }
 
+    /**
+     * Получает количество созданных сотрудником ивентов
+     * @param events - Все ивенты
+     * @returns number - Количество созданных ивентов
+     */
     public createEventsCount(events: CalendarEvent[]): number {
         return events.reduce((acc, event) => {
             if (event.owner?.id === this._userService.user.id) {
@@ -115,8 +132,7 @@ export class DemoComponent implements OnInit {
     }
 
     /**
-     *
-     * @param param0
+     * Нажатие на день
      */
     public dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
         this.dayIsClicked = true;
@@ -191,7 +207,6 @@ export class DemoComponent implements OnInit {
     }
 
     public eventClicked(event: any): void {
-        console.log(typeof(event));
         this.onCreateModal(event.event.title, event.event.members, event.event.owner);
     }
 
