@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CalendarEvent } from 'angular-calendar';
+import { EmployeeService } from 'src/app/services/employee.service';
+import { UserService } from 'src/app/services/user.service';
+import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
 
 @Component({
     templateUrl: './event-form.component.html',
@@ -11,14 +14,19 @@ export class EventFormComponent {
     public eventForm: FormGroup;
     public startHours: number[] = this.populateHoursArray(0, 23);
     public endHours: number[] = this.populateHoursArray(1, 24);
+    public employees!: EmployeeModel[];
     @Output() public submitEvent = new EventEmitter<CalendarEvent>();
 
-    constructor() {
+    constructor(private _employeeService: EmployeeService, private _userService: UserService) {
         this.eventForm = new FormGroup({
             eventTitle: new FormControl('', Validators.required),
             eventMembers: new FormControl('', Validators.required),
             eventStart: new FormControl('', Validators.required),
             eventEnd: new FormControl('', Validators.required)
+        });
+        _employeeService.getEmployees().subscribe(employees => {
+            this.employees = employees.filter(
+                employee => employee.id !== this._userService.user.id);
         });
     }
 

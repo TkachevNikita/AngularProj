@@ -12,6 +12,10 @@ export class LocalStorageService {
 
     }
 
+    public removeItem(key: string): void {
+        localStorage.removeItem(key);
+    }
+
     public setItem(key: string, value: string): void {
         return localStorage.setItem(key, value);
     }

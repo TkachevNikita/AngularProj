@@ -3,7 +3,7 @@
     <div class="sort">
       <div class="sort__header">
         <span>Сортировать по:</span>
-        <button class="new-emp" *ngIf="isAdmin">;
+        <button class="new-emp" *ngIf="isAdmin" (click)="onCreateModal()">
           Добавить
         </button>
       </div>
@@ -15,7 +15,6 @@
     </div>
     <div class="employee__container">
       <app-employee *ngFor="let emp of employees" [employee]="emp">
-
       </app-employee>
     </div>
   </div>

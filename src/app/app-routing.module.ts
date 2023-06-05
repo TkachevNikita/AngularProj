@@ -5,7 +5,7 @@ import { CabinetGuardService } from './services/cabinet.guard.service';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'cabinet',
         pathMatch: 'full',
     },
     {

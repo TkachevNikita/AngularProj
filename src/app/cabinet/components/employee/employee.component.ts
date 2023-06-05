@@ -22,11 +22,6 @@ export class EmployeeComponent {
         modalRef.onResult()
             .pipe(
                 take(1)
-            )
-            .subscribe(
-                closed => console.log('closed', closed),
-                dismissed => console.log('dismissed', dismissed),
-                () => console.log('completed')
             );
     }
 }

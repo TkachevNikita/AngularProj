@@ -1,0 +1,35 @@
+form {
+  margin-top: 30px;
+}
+
+.form__name {
+  display: flex;
+}
+
+input#name {
+  margin-right: 20px;
+}
+
+input {
+  height: 22px;
+}
+
+select {
+  height: 25px;
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #2B4A52;
+  color: white;
+  cursor: pointer;
+  border-radius: 12px;
+  font-size: 16px;
+}

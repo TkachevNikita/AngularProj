@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { EmployeeModel } from '../view-models/employee/employee.model';
 import { IEmployee } from '../interfaces/employess.interface';
 import { Observable, map, of } from 'rxjs';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class EmployeeService {
 
+    constructor(private _storage: LocalStorageService) {}
     /**
      * Получение сотрудников
      * @return Observable<EmployeeModel[]>
@@ -74,6 +76,13 @@ export class EmployeeService {
                 eventLimit: 5
             }
         ];
+
+        if (this._storage.getItem('newEmployees')) {
+            const newEmployeeList: IEmployee[] = this._storage.getItem('newEmployees');
+            const resultEmployees = [...employeeList, ...newEmployeeList];
+
+            return of(resultEmployees);
+        }
 
         return of(employeeList);
     }

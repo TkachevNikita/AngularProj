@@ -49,11 +49,16 @@ app-select.ng-invalid {
   font-weight: 600;
 }
 
-.form__group:last-child {
+.form__time {
   flex-direction: row;
 }
 
 .form__group-time {
   display: flex;
   flex-direction: column;
+  width: 50%;
+}
+
+.form__group-time:first-child {
+  margin-right: 20px;
 }

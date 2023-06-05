@@ -1,0 +1,38 @@
+<form [formGroup]="newEmployeeForm">
+  <div class="form__name">
+    <div class="form__group">
+      <label for="name">Имя:</label>
+      <input type="text" id="name" [formControlName]="'name'" placeholder="Введите имя">
+    </div>
+    <div class="form__group">
+      <label for="surname">Фамилия:</label>
+      <input type="text" id="surname" [formControlName]="'surname'" placeholder="Введите фамилию">
+    </div>
+  </div>
+  <div class="form__group">
+    <label for="age">Возраст:</label>
+    <input type="number" id="age" [formControlName]="'age'" placeholder="Введите возраст">
+  </div>
+  <div class="form__group">
+    <label for="post">Должность:</label>
+    <select id="post" [formControlName]="'profession'">
+      <option value="programmer" selected>Программист</option>
+      <option value="qaengineer">Тестировщик</option>
+      <option value="analyst">Аналитик</option>
+      <option value="manager">Менеджер</option>
+    </select>
+  </div>
+  <div class="form__group">
+    <label for="department">Отдел:</label>
+    <select id="department" [formControlName]="'department'">
+      <option value="department 1">Отдел 1</option>
+      <option value="department 2">Отдел 2</option>
+      <option value="department 3">Отдел 3</option>
+    </select>
+  </div>
+  <div class="form__group">
+    <label for="salary">Зарплата:</label>
+    <input type="number" id="salary" [formControlName]="'salary'" placeholder="Введите зарплату">
+  </div>
+  <button (click)="onSubmit()">Отправить</button>
+</form>

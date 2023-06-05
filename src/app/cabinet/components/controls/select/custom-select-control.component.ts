@@ -2,6 +2,7 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { UserService } from 'src/app/services/user.service';
 import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
 
 @Component({
@@ -19,7 +20,7 @@ import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
 
 export class SelectComponent implements ControlValueAccessor {
     public dropDownIsOpen: boolean = false;
-    public employees!: EmployeeModel[];
+    @Input() public employees!: EmployeeModel[];
     public currentOption: string = '';
     public selectedList: EmployeeModel[] = [];
     public selectedItem!: EmployeeModel;
@@ -28,12 +29,6 @@ export class SelectComponent implements ControlValueAccessor {
     public value!: string;
     private _onTouched!: () => void;
     private _onChange!: (value: EmployeeModel[] | EmployeeModel) => void;
-
-    constructor(private _employeeService: EmployeeService) {
-        _employeeService.getEmployees().subscribe(employees => {
-            this.employees = employees;
-        });
-    }
 
     public writeValue(value: any): void {
         this.value = value;

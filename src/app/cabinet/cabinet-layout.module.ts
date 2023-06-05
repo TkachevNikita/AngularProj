@@ -17,6 +17,8 @@ import { EmployeeFormComponent } from './components/forms/employee-form/employee
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeModalComponent } from './components/modals/employee-modal/employee-modal.component';
 import { LocalStorageManagerService } from '../services/local-storage-manager.service';
+import { NewEmployeeFormComponent } from './components/forms/new-employee-form/new-employee-form.component';
+import { NewEmployeeModalComponent } from './components/modals/new-employee-modal/new-employee-modal.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { LocalStorageManagerService } from '../services/local-storage-manager.se
         NotFoundPage,
         RoomsCalendarComponent,
         EmployeeFormComponent,
-        EmployeeModalComponent
+        EmployeeModalComponent,
+        NewEmployeeFormComponent,
+        NewEmployeeModalComponent
     ],
     imports: [
         routing,

@@ -1,4 +1,4 @@
-<div class="header" *ngIf="isRoom">
+<div class="header" *ngIf="isRoom && !isAdmin">
   <div class="limit" *ngIf="dayIsClicked">
     Возможно запланировать встреч: {{ eventsRemainingCount }}
   </div>

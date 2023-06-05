@@ -1,7 +1,7 @@
 <form [formGroup]="loginForm">
   <div class="form__group">
     <label for="employee">Сотрудник:</label>
-    <app-select id="employee" formControlName="loginEmployee" [multiple]="false"></app-select>
+    <app-select id="employee" formControlName="loginEmployee" [employees]="employees" [multiple]="false"></app-select>
     <div
       class="error-message"
       *ngIf="loginForm.get('loginEmployee')?.touched && loginForm.get('loginEmployee')?.errors?['required'] : null">

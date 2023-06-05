@@ -1,4 +1,6 @@
 import { Component,  } from '@angular/core';
+import { EmployeeService } from 'src/app/services/employee.service';
+import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
 
 @Component({
     templateUrl: 'login.page.html',

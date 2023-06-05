@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, take } from 'rxjs';
+import { ModalService } from 'src/app/libs/modal-service/modal.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { UserService } from 'src/app/services/user.service';
 import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
+import { NewEmployeeModalComponent } from '../../components/modals/new-employee-modal/new-employee-modal.component';
 
 @Component({
     selector: 'app-employees',
@@ -14,12 +16,28 @@ import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
 export class EmployeesPageComponent {
 
     public employees$!: Observable<EmployeeModel[]>;
+    public newEmployees$!: Observable<EmployeeModel[]>;
     public employeesData!: EmployeeModel[];
     public isAdmin: boolean | undefined = this._user.user.isAdmin;
 
-    constructor(private _employeeService: EmployeeService, private _user: UserService) {
-        this.employees$ = _employeeService.getEmployees();
+    constructor
+    (
+      private _employeeService: EmployeeService,
+      private _user: UserService,
+      private _modalService: ModalService
+    ) {
+        this.employees$ = this._employeeService.getEmployees();
         this.employees$.subscribe((data) => this.employeesData = data);
+    }
+
+    public onCreateModal(): void {
+        const modalRef = this._modalService.open(NewEmployeeModalComponent,
+            { title: 'Добавление сотрудника' });
+
+        modalRef.onResult()
+            .pipe(
+                take(1)
+            );
     }
 
     public sortByName(): void {

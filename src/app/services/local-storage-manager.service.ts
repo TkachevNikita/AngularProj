@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
 import { CalendarEvent } from 'angular-calendar';
 import { EventsKey } from '../enums/events-key.enum';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
 import { UserService } from './user.service';
 
 @Injectable()
@@ -13,13 +11,20 @@ export class LocalStorageManagerService {
 
     constructor(private _localStorageService: LocalStorageService, private _userService: UserService) { }
 
+    /**
+     * Устанавливаем ивенты для авторизованного сотрудника
+     *
+     */
     public setSelfEvents(key: EventsKey): void {
         const events = this.getEventsByKey(EventsKey.allMeetingRooms);
-        const newEvents: CalendarEvent[] = events
-            .filter(
-                event => event.members?.some(member  => member.id === this._userService.user.id)
-            );
-        this.setEventsByKey(key, newEvents);
+        if (events) {
+            const newEvents: CalendarEvent[] = events
+                .filter(
+                    event => event.members?.some(member  => member.id === this._userService.user.id) ||
+                    event.owner?.id === this._userService.user.id
+                );
+            this.setEventsByKey(key, newEvents);
+        }
     }
     /**
      * Объединяем все ивенты

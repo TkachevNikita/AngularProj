@@ -1,28 +1,24 @@
 import { Component } from '@angular/core';
-import { Modal } from '../../../libs/modal-service/models/modal.model';
+import { Modal } from '../../../../libs/modal-service/models/modal.model';
 import { ModalRef } from 'src/app/libs/modal-service/models/modal-ref.model';
-import { CalendarEvent } from 'angular-calendar';
 import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
-
+import { EmployeeService } from 'src/app/services/employee.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
-    templateUrl: './modal.component.html',
-    styleUrls: ['./styles/modal.component.scss']
+    templateUrl: './new-employee-modal.component.html',
+    styleUrls: ['../styles/modal.component.scss']
 })
-export class ModalComponent extends Modal {
-
+export class NewEmployeeModalComponent extends Modal {
     public override modalInstance!: ModalRef;
-
     public title!: string;
-    public message!: string;
-    public members!: EmployeeModel[];
-    public owner!: EmployeeModel;
+
+    constructor(private _storage: LocalStorageService, private _employeeService: EmployeeService) {
+        super();
+    }
 
     public onInjectInputs(inputs: any): void {
         this.title = inputs.title;
-        this.message = inputs.message;
-        this.members = inputs.members;
-        this.owner = inputs.owner;
     }
 
     public save(): void {

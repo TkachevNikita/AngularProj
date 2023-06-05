@@ -15,30 +15,30 @@
       *ngIf="eventForm.get('eventMembers')?.touched && eventForm.get('eventMembers')?.errors?['required'] : null">
       Обязательное поле*
     </div>
-    <app-select id="eventStart" [formControlName]="'eventMembers'" [multiple]="true"></app-select>
+    <app-select id="eventStart" [employees]="employees" [formControlName]="'eventMembers'" [multiple]="true"></app-select>
   </div>
-  <div class="form__group">
+  <div class="form__group form__time">
     <div class="form__group-time">
       <label for="eventStart">Время начала:</label>
-      <div
-        class="error-message"
-        *ngIf="eventForm.get('eventDuration')?.touched && eventForm.get('eventDuration')?.errors?['required'] : null">
-        Обязательное поле*
-      </div>
       <select [formControlName]="'eventStart'" id="eventStart">
         <option *ngFor="let hour of startHours" [value]="hour">{{hour}}:00</option>
       </select>
+      <div
+        class="error-message"
+        *ngIf="eventForm.get('eventStart')?.touched && eventForm.get('eventStart')?.errors?['required'] : null">
+        Обязательное поле*
+      </div>
     </div>
     <div class="form__group-time">
     <label for="eventEnd">Время окончания:</label>
-      <div
-        class="error-message"
-        *ngIf="eventForm.get('eventDuration')?.touched && eventForm.get('eventDuration')?.errors?['required'] : null">
-        Обязательное поле*
-      </div>
       <select [formControlName]="'eventEnd'" id="eventEnd">
         <option *ngFor="let hour of endHours" [value]="hour">{{hour}}:00</option>
       </select>
+      <div
+        class="error-message"
+        *ngIf="eventForm.get('eventEnd')?.touched && eventForm.get('eventEnd')?.errors?['required'] : null">
+        Обязательное поле*
+      </div>
       </div>
     </div>
   <button (click)="onSubmit()" [disabled]="eventForm.invalid">Создать</button>

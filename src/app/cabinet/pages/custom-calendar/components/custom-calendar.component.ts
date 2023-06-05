@@ -21,6 +21,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ModalService } from '../../../../libs/modal-service/modal.service';
 import { ModalComponent } from 'src/app/cabinet/components/modals/modal.component';
 import { UserService } from 'src/app/services/user.service';
+import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
 
 @Component({
     selector: 'mwl-demo-component',
@@ -36,6 +37,7 @@ export class DemoComponent implements OnInit {
     public dayIsClicked: boolean = false;
     public ownerCount!: number;
     public isRoom: boolean = true;
+    public isAdmin: boolean | undefined = this._userService.user.isAdmin;
 
     constructor(
         private _modal: NgbModal,
@@ -63,18 +65,13 @@ export class DemoComponent implements OnInit {
                 });
     }
 
-    public onCreateModal(): void {
+    public onCreateModal(eventTitle: string, members: EmployeeModel[], owner: EmployeeModel ): void {
         const modalRef = this._modalService.open(ModalComponent,
-            { title: this.calendarViewModel.currentTitle, message: 'My dynamic message', members: this.calendarViewModel.currentMembers });
+            { title: eventTitle, members: members, owner: owner });
 
         modalRef.onResult()
             .pipe(
                 take(1)
-            )
-            .subscribe(
-                closed => console.log('closed', closed),
-                dismissed => console.log('dismissed', dismissed),
-                () => console.log('completed')
             );
     }
 
@@ -179,13 +176,13 @@ export class DemoComponent implements OnInit {
             }
             this._storageManager.setEventsByKey(this.calendarViewModel.id, this.calendarViewModel.events$.getValue());
         }
-        console.log('123');
+
     }
 
     public eventClicked(event: any): void {
         this.calendarViewModel.currentMembers = event.event.members;
         this.calendarViewModel.currentTitle = event.event.title;
-        this.onCreateModal();
+        this.onCreateModal(event.event.title, event.event.members, event.event.owner);
     }
 
     public deleteEvent(eventToDelete: CalendarEvent): void {

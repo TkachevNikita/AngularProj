@@ -9,7 +9,6 @@ p {
 .menu {
   width: 250px;
   height: 100vh;
-  background-color: #537173;
   position: relative;
 }
 
@@ -114,21 +113,9 @@ p {
   width: 100%;
 }
 
-// .leave-open {
-//   display: flex;
-//   align-items: center;
-// }
-
-// .route-leave {
-//   position: absolute;
-//   background-color: #C05640;
-//   width: 33%;
-//   height: 100%;
-//   right: -33%;
-//   display: none;
-// }
-
-// .route-leave svg {
-//   width: 30px;
-//   height: 30px;
-// }
+.menu__container {
+  height: 100%;
+  position: fixed;
+  width: 250px;
+  background-color: #537173;
+}
