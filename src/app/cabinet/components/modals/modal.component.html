@@ -1,5 +1,5 @@
 <div class="modal">
-  <div class="modal-header">
+  <div class="modal-header" style="margin-bottom: 20px;">
     <h3>{{ title }}</h3>
     <button type="button" class="close" (click)="cancel()">&times;</button>
   </div>
@@ -8,7 +8,7 @@
       <h3>Организатор:</h3>
       {{owner.name}} {{owner.surname}}
     </div>
-    <div class="modal-body__users">
+    <div class="modal-body__users" style="margin:20px 0;">
       <h3>Список участников:</h3>
       <ul class="modal-list">
         <li *ngFor="let member of members" class="modal-item">

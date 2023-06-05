@@ -36,6 +36,11 @@
       </select>
       <div
         class="error-message"
+        *ngIf="eventForm.get('eventStart')?.touched && eventForm.get('eventEnd')?.touched && eventForm.hasError('startGreaterThanEnd')">
+        Время окончания не может быть меньше или равно времени начала
+      </div>
+      <div
+        class="error-message"
         *ngIf="eventForm.get('eventEnd')?.touched && eventForm.get('eventEnd')?.errors?['required'] : null">
         Обязательное поле*
       </div>

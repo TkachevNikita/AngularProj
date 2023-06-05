@@ -9,7 +9,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class NewEmployeeFormComponent {
     public newEmployeeForm: FormGroup;
-    @Output() public addEmployee = new EventEmitter<void>();
+    @Output() public closeModal = new EventEmitter<void>();
 
     constructor(private _storage: LocalStorageService) {
         this.newEmployeeForm = new FormGroup({
@@ -22,8 +22,8 @@ export class NewEmployeeFormComponent {
         });
     }
 
-    public addNewEmployee(): void {
-        this.addEmployee.emit();
+    public closePopup(): void {
+        this.closeModal.emit();
     }
 
     public onSubmit(): void {
@@ -39,5 +39,7 @@ export class NewEmployeeFormComponent {
             const mergedEmployees = [...this._storage.getItem('newEmployees'), ...[newEmployee]];
             this._storage.setItem('newEmployees', JSON.stringify(mergedEmployees));
         }
+
+        this.closePopup();
     }
 }

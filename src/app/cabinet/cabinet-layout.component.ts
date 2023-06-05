@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { validateEvents } from 'angular-calendar/modules/common/util/util';
 import { BehaviorSubject, filter } from 'rxjs';
 
 @Component({
@@ -14,25 +15,30 @@ export class CabinetLayoutComponent {
             .subscribe(
                 {
                     next: (value: any) => {
-                        switch (value.url) {
-                            case '/cabinet':
-                                this.title$.next('Главная страница');
-                                break;
-                            case '/cabinet/calendar':
-                                this.title$.next('Расписание');
-                                break;
-                            case '/cabinet/employees':
-                                this.title$.next('Сотрудники');
-                                break;
-                            case '/cabinet/rooms':
-                                this.title$.next('Переговорные комнаты');
-                                break;
-                            case '/cabinet/selfcalendar':
-                                this.title$.next('Моё расписание');
-                                break;
-                            default:
-                                this.title$.next('Страница не найдена');
-                                break;
+                        if (Number(value.url[value.url.length - 1]) || value.url[value.url.length - 1] === '0') {
+                            this.title$.next('Переговорная комната' + ' ' + String(Number(value.url[value.url.length - 1]) + 1));
+                        } else {
+                            console.log(Number(value.url[value.url.length - 1]));
+                            switch (value.url) {
+                                case '/cabinet':
+                                    this.title$.next('Главная страница');
+                                    break;
+                                case '/cabinet/calendar':
+                                    this.title$.next('Расписание');
+                                    break;
+                                case '/cabinet/employees':
+                                    this.title$.next('Сотрудники');
+                                    break;
+                                case '/cabinet/rooms':
+                                    this.title$.next('Переговорные комнаты');
+                                    break;
+                                case '/cabinet/selfcalendar':
+                                    this.title$.next('Моё расписание');
+                                    break;
+                                default:
+                                    this.title$.next('Страница не найдена');
+                                    break;
+                            }
                         }
                     }
                 });

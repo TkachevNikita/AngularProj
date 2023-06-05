@@ -41,7 +41,6 @@ export class EmployeeLoginFormComponent {
             this._userService.user = user;
             this._router.navigate(['/cabinet/calendar']);
             this._storage.setItem('user', JSON.stringify(user));
-            console.log(this._userService.user);
         }
     }
 }

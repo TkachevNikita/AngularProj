@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Modal } from '../../../libs/modal-service/models/modal.model';
 import { ModalRef } from 'src/app/libs/modal-service/models/modal-ref.model';
-import { CalendarEvent } from 'angular-calendar';
 import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
 
 

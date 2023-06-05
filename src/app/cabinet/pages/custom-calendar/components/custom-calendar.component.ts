@@ -22,6 +22,7 @@ import { ModalService } from '../../../../libs/modal-service/modal.service';
 import { ModalComponent } from 'src/app/cabinet/components/modals/modal.component';
 import { UserService } from 'src/app/services/user.service';
 import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
+import { ErrorModalComponent } from 'src/app/cabinet/components/modals/error-modal/error-modal.component';
 
 @Component({
     selector: 'mwl-demo-component',
@@ -36,8 +37,10 @@ export class DemoComponent implements OnInit {
     public eventsRemainingCount!: number;
     public dayIsClicked: boolean = false;
     public ownerCount!: number;
-    public isRoom: boolean = true;
+    public isRoom: boolean = false;
     public isAdmin: boolean | undefined = this._userService.user.isAdmin;
+    public startHours: number[] = this.populateHoursArray(0, 22);
+    public endHours: number[] = this.populateHoursArray(1, 23);
 
     constructor(
         private _modal: NgbModal,
@@ -49,20 +52,6 @@ export class DemoComponent implements OnInit {
         private _userService: UserService
     ) {
         this.calendarViewModel = new CalendarViewModel([]);
-        this._router.events.pipe(filter(event => event instanceof NavigationEnd))
-            .subscribe(
-                {
-                    next: (value: any) => {
-                        switch (value.url) {
-                            case '/cabinet/calendar':
-                                this.isRoom = false;
-                                break;
-                            case '/cabinet/selfcalendar':
-                                this.isRoom = false;
-                                break;
-                        }
-                    }
-                });
     }
 
     public onCreateModal(eventTitle: string, members: EmployeeModel[], owner: EmployeeModel ): void {
@@ -75,6 +64,15 @@ export class DemoComponent implements OnInit {
             );
     }
 
+    public onErrorModal(title: string, message: string ): void {
+        const modalRef = this._modalService.open(ErrorModalComponent,
+            { title: title, errorMessage: message });
+
+        modalRef.onResult()
+            .pipe(
+                take(1)
+            );
+    }
 
     public ngOnInit(): void {
         const data = this._storageManager.getEventsByKey(this.calendarViewModel.id);
@@ -93,6 +91,21 @@ export class DemoComponent implements OnInit {
 
         return false;
     }
+
+    // public cleanHours(start: number, end: number, startArray: number[], endArray: number[]): void {
+    //     const conflictingIndices: number[] = [];
+
+    //     for (let i = 0; i < startArray.length; i++) {
+    //         if (startArray[i] < end && endArray[i] > start) {
+    //             conflictingIndices.push(i);
+    //         }
+    //     }
+
+    //     conflictingIndices.reverse().forEach((index) => {
+    //         startArray.splice(index, 1);
+    //         endArray.splice(index, 1);
+    //     });
+    // }
 
     public refactorEvents(data: CalendarEvent[]): CalendarEvent[] {
         data.forEach((element: CalendarEvent) => {
@@ -123,6 +136,12 @@ export class DemoComponent implements OnInit {
      * Выбор дня
      */
     public dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+        // for (const currEvent of events) {
+        //     if (currEvent.end) {
+        //         this.cleanHours(currEvent.start.getHours(), currEvent.end.getHours(), this.startHours, this.endHours);
+        //     }
+        // }
+
         this.dayIsClicked = true;
         if (isSameMonth(date, this.calendarViewModel.viewDate)) {
             if (
@@ -158,7 +177,7 @@ export class DemoComponent implements OnInit {
                 {
                     title: event.eventTitle,
                     start: addHours(event.start, Number(event.eventStart)),
-                    end: addHours(event.start, Number(event.eventEnd) + 1),
+                    end: addHours(event.start, Number(event.eventEnd)),
                     color: this.calendarViewModel.color,
                     draggable: true,
                     resizable: {
@@ -175,8 +194,19 @@ export class DemoComponent implements OnInit {
                 this.calendarViewModel.dayIsClicked = false;
             }
             this._storageManager.setEventsByKey(this.calendarViewModel.id, this.calendarViewModel.events$.getValue());
+        } else {
+            this.onErrorModal('Конфликт расписания', '*Ваше событие конфликтует с другими, пожалуйста, ознакомьтесь с расписанием');
         }
 
+    }
+
+    public populateHoursArray(start: number, end: number): number[] {
+        const result = [];
+        for (let i = start; i <= end; i++) {
+            result.push(i);
+        }
+
+        return result;
     }
 
     public eventClicked(event: any): void {
@@ -195,14 +225,6 @@ export class DemoComponent implements OnInit {
 
     public closeOpenMonthViewDay(): void {
         this.calendarViewModel.activeDayIsOpen = false;
-    }
-
-    public openEventDialog(): void {
-        this.calendarViewModel.eventDialogIsOpen = true;
-    }
-
-    public closeEventDialog(): void {
-        this.calendarViewModel.eventDialogIsOpen = false;
     }
 
     public openModal(): void {

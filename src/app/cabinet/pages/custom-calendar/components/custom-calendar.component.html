@@ -1,4 +1,4 @@
-<div class="header" *ngIf="isRoom && !isAdmin">
+<div class="header" *ngIf="calendarViewModel.isMeetingRoom && !isAdmin">
   <div class="limit" *ngIf="dayIsClicked">
     Возможно запланировать встреч: {{ eventsRemainingCount }}
   </div>
@@ -63,7 +63,7 @@
     </div>
   </div>
 </div>
-
+<br>
 <ng-container *ngIf="calendarViewModel.events$ | async as e">
   <div [ngSwitch]="this.calendarViewModel.view">
     <mwl-calendar-month-view
@@ -93,7 +93,7 @@
 </ng-container>
 
 <app-form-dialog *ngIf="this.calendarViewModel.modalIsOpen" (closeModalEvent)="closeModal()">
-  <app-form (submitEvent)="onSubmit($event)"></app-form>
+  <app-form (submitEvent)="onSubmit($event)" [startHours]="startHours" [endHours]="endHours"></app-form>
 </app-form-dialog>
 
 

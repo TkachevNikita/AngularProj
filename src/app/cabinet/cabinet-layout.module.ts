@@ -19,6 +19,7 @@ import { EmployeeModalComponent } from './components/modals/employee-modal/emplo
 import { LocalStorageManagerService } from '../services/local-storage-manager.service';
 import { NewEmployeeFormComponent } from './components/forms/new-employee-form/new-employee-form.component';
 import { NewEmployeeModalComponent } from './components/modals/new-employee-modal/new-employee-modal.component';
+import { ErrorModalComponent } from './components/modals/error-modal/error-modal.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { NewEmployeeModalComponent } from './components/modals/new-employee-moda
         EmployeeFormComponent,
         EmployeeModalComponent,
         NewEmployeeFormComponent,
-        NewEmployeeModalComponent
+        NewEmployeeModalComponent,
+        ErrorModalComponent
     ],
     imports: [
         routing,

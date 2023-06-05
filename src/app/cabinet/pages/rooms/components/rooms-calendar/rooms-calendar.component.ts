@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { EventsKey } from 'src/app/enums/events-key.enum';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { RoomService } from 'src/app/services/rooms.service';
@@ -12,11 +12,14 @@ import { EventColor } from 'calendar-utils';
     templateUrl: 'rooms-calendar.component.html'
 })
 
-export class RoomsCalendarComponent {
+export class RoomsCalendarComponent implements OnDestroy {
     public model!: CalendarViewModel;
     public choiceIsClose: boolean = false;
     public rooms$!: Observable<RoomModel[]>;
     public roomsData!: RoomModel[];
+    private _paramsSubscription!: Subscription | undefined;
+    private _roomsSubscription!: Subscription | undefined;
+
     public colors: Record<string, EventColor> = {
         red: {
             primary: '#ad2121',
@@ -73,9 +76,15 @@ export class RoomsCalendarComponent {
 
     public init(): void {
 
-        this._route.params.subscribe((params: Params) => {
+        this._paramsSubscription = this._route.params.subscribe((params: Params) => {
             this.model = new CalendarViewModel([]);
+            this.model.isMeetingRoom = true;
             this.model.id = params['id'];
         });
+    }
+
+    public ngOnDestroy(): void {
+        this._paramsSubscription?.unsubscribe();
+        this._roomsSubscription?.unsubscribe();
     }
 }

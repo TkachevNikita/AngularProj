@@ -20,6 +20,7 @@ export class CalendarViewModel {
     public eventDialogIsOpen: boolean;
     public id!: EventsKey;
     public color!: EventColor;
+    public isMeetingRoom!: boolean;
 
     constructor(events: CalendarEvent[] | []) {
         this.calendarView = CalendarView;
@@ -31,6 +32,7 @@ export class CalendarViewModel {
         this.modalIsOpen = false;
         this.eventDialogIsOpen = false;
         this.id = EventsKey.allMeetingRooms;
+        this.isMeetingRoom = false;
     }
 
 }
