@@ -1,33 +1,48 @@
 import { Component } from '@angular/core';
-import { Observable, of, take } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of, take, tap } from 'rxjs';
 import { ModalService } from 'src/app/libs/modal-service/modal.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { UserService } from 'src/app/services/user.service';
 import { EmployeeModel } from 'src/app/view-models/employee/employee.model';
 import { NewEmployeeModalComponent } from '../../components/modals/new-employee-modal/new-employee-modal.component';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { EmployeesKey } from 'src/app/enums/employees.enums';
 
 @Component({
     selector: 'app-employees',
     templateUrl: './employees.page.html',
-    providers: [EmployeeService],
     styleUrls: ['./styles/employees.page.scss']
 })
-
 export class EmployeesPageComponent {
 
-    public employees$!: Observable<EmployeeModel[]>;
+    public employees$: BehaviorSubject<EmployeeModel[]> = new BehaviorSubject<EmployeeModel[]>([]);
     public newEmployees$!: Observable<EmployeeModel[]>;
-    public employeesData!: EmployeeModel[];
     public isAdmin: boolean | undefined = this._user.user.isAdmin;
 
-    constructor
-    (
-      private _employeeService: EmployeeService,
-      private _user: UserService,
-      private _modalService: ModalService
+    constructor(
+        private _employeeService: EmployeeService,
+        private _user: UserService,
+        private _modalService: ModalService,
+        private _storage: LocalStorageService
     ) {
-        this.employees$ = this._employeeService.getEmployees();
-        this.employees$.subscribe((data) => this.employeesData = data);
+        this._employeeService.getEmployees()
+            .pipe(
+                tap((value: EmployeeModel[]) => {
+                    this._storage.setItem(EmployeesKey.employees, JSON.stringify(value));
+                })
+            )
+            .subscribe({
+                next: (value: EmployeeModel[]) => {
+                    this.employees$.next(value);
+                }
+            });
+
+        this._employeeService.employee$
+            .subscribe({
+                next: () => {
+                    this.employees$.next(this._storage.getItem(EmployeesKey.employees));
+                }
+            });
     }
 
     public onCreateModal(): void {
@@ -37,11 +52,17 @@ export class EmployeesPageComponent {
         modalRef.onResult()
             .pipe(
                 take(1)
-            );
+            )
+            .subscribe({
+                next: (value) => console.log(value)
+            });
+
+
     }
 
-    public sortByName(): void {
-        this.employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
+    public sortByName(employeesData: EmployeeModel[]): void {
+
+        employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
             if (a.name > b.name) {
                 return 1;
             }
@@ -51,11 +72,12 @@ export class EmployeesPageComponent {
 
             return 0;
         });
-        this.employees$ = of(this.employeesData);
+        this.employees$.next(employeesData);
     }
 
-    public sortByDepartment(): void {
-        this.employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
+    public sortByDepartment(employeesData: EmployeeModel[]): void {
+
+        employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
             if (a.department! > b.department!) {
                 return 1;
             }
@@ -65,11 +87,12 @@ export class EmployeesPageComponent {
 
             return 0;
         });
-        this.employees$ = of(this.employeesData);
+
+        this.employees$.next(employeesData);
     }
 
-    public sortByProfession(): void {
-        this.employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
+    public sortByProfession(employeesData: EmployeeModel[]): void {
+        employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
             if (a.profession! > b.profession!) {
                 return 1;
             }
@@ -79,10 +102,7 @@ export class EmployeesPageComponent {
 
             return 0;
         });
-        this.employees$ = of(this.employeesData);
+        this.employees$.next(employeesData);
     }
 
-    public selectChanged(value: string): void {
-        console.log(value);
-    }
 }

@@ -16,7 +16,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                component: MainPageComponent,
+                component: DemoComponent,
                 pathMatch: 'full'
             },
             {
@@ -34,9 +34,6 @@ const routes: Routes = [
             {
                 path: 'rooms',
                 component: RoomsPageComponent,
-                // children: [
-                //     { path: ':id', component: RoomsCalendarComponent }
-                // ]
             },
             {
                 path: 'rooms/:id',

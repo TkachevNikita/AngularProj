@@ -23,8 +23,8 @@ const startEndValidator: ValidatorFn = (control: AbstractControl): { [key: strin
 })
 export class EventFormComponent {
     public eventForm: FormGroup;
-    @Input() public startHours!: number[];
-    @Input() public endHours!: number[];
+    public startHours: number[] = this.populateHoursArray(0, 22);
+    public endHours: number[] = this.populateHoursArray(1, 23);
     public employees!: EmployeeModel[];
     @Output() public submitEvent = new EventEmitter<CalendarEvent>();
 

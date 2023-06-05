@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { EmployeeModel } from '../view-models/employee/employee.model';
 import { IEmployee } from '../interfaces/employess.interface';
-import { Observable, map, of } from 'rxjs';
+import { Observable, Subject, map, of } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
+import { EmployeesKey } from '../enums/employees.enums';
 
 @Injectable({
     providedIn: 'root',
 })
 export class EmployeeService {
 
+    public employee$: Subject<void> = new Subject<void>();
     constructor(private _storage: LocalStorageService) {}
     /**
      * Получение сотрудников
@@ -22,6 +24,10 @@ export class EmployeeService {
             );
     }
 
+    /**
+     * Получение сотрудников из Storage
+     * @returns Observable<IEmployee[]>
+     */
     private requestEmployee(): Observable<IEmployee[]> {
 
         const employeeList: IEmployee[] = [
@@ -77,11 +83,10 @@ export class EmployeeService {
             }
         ];
 
-        if (this._storage.getItem('newEmployees')) {
-            const newEmployeeList: IEmployee[] = this._storage.getItem('newEmployees');
-            const resultEmployees = [...employeeList, ...newEmployeeList];
+        if (this._storage.getItem(EmployeesKey.employees)) {
+            const newEmployeeList: IEmployee[] = this._storage.getItem(EmployeesKey.employees);
 
-            return of(resultEmployees);
+            return of(newEmployeeList);
         }
 
         return of(employeeList);
