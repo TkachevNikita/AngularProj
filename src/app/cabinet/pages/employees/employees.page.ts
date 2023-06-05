@@ -62,47 +62,50 @@ export class EmployeesPageComponent implements OnDestroy {
             );
     }
 
-    public sortByName(): void {
-      this.employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
-          if (a.name > b.name) {
-              return 1;
-          }
-          else if (a.name < b.name) {
-              return -1;
-          }
+    public sortByName(employeesData: EmployeeModel[]): void {
 
-          return 0;
-      });
-      this.employees$ = of(this.employeesData);
-  }
+        employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
+            if (a.name > b.name) {
+                return 1;
+            }
+            else if (a.name < b.name) {
+                return -1;
+            }
 
-  public sortByDepartment(): void {
-      this.employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
-          if (a.department! > b.department!) {
-              return 1;
-          }
-          else if (a.department! < b.department!) {
-              return -1;
-          }
+            return 0;
+        });
+        this.employees$.next(employeesData);
+    }
 
-          return 0;
-      });
-      this.employees$ = of(this.employeesData);
-  }
+    public sortByDepartment(employeesData: EmployeeModel[]): void {
 
-  public sortByProfession(): void {
-      this.employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
-          if (a.profession! > b.profession!) {
-              return 1;
-          }
-          else if (a.profession! < b.profession!) {
-              return -1;
-          }
+        employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
+            if (a.department! > b.department!) {
+                return 1;
+            }
+            else if (a.department! < b.department!) {
+                return -1;
+            }
 
-          return 0;
-      });
-      this.employees$ = of(this.employeesData);
-  }
+            return 0;
+        });
+
+        this.employees$.next(employeesData);
+    }
+
+    public sortByProfession(employeesData: EmployeeModel[]): void {
+        employeesData.sort((a: EmployeeModel, b: EmployeeModel) => {
+            if (a.profession! > b.profession!) {
+                return 1;
+            }
+            else if (a.profession! < b.profession!) {
+                return -1;
+            }
+
+            return 0;
+        });
+        this.employees$.next(employeesData);
+    }
 
 
     public ngOnDestroy(): void {
